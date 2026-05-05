@@ -1,73 +1,89 @@
 import { Link } from "react-router-dom";
 import "../css/footer.css";
+import logo from "../assets/logo.png";
+import { FaWhatsapp, FaInstagram, FaFacebook, FaTelegram } from "react-icons/fa";
+import { FiMapPin, FiPhone, FiMail, FiArrowUpRight } from "react-icons/fi";
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="footer-grid">
+    <footer className="footer">
+      <div className="footer-glow"></div>
 
+      <div className="footer-grid">
         <div className="footer-brand">
-          <div className="logo-text">
-            MOVE<em>X</em>OLOG
-          </div>
+          <Link to="/" className="footer-logo">
+            <img src={logo} alt="Movexolog Logo" />
+          </Link>
+
           <p>
-            An industry leader in global logistics with a powerful network and reliable operations.
+            We believe logistics should feel clear, fast and dependable. From
+            planning to delivery, our process is built to reduce confusion,
+            improve visibility and keep your cargo moving with fewer delays.
           </p>
 
           <div className="social-links">
-            <a>in</a>
-            <a>tw</a>
-            <a>fb</a>
-            <a>yt</a>
+            <a href="https://t.me/yourusername" target="_blank" rel="noreferrer" aria-label="Telegram">
+              <FaTelegram />
+            </a>
+            <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="https://wa.me/10000000000" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <FaWhatsapp />
+            </a>
+            <a href="https://facebook.com/yourpage" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <FaFacebook />
+            </a>
           </div>
+        </div>
+
+        <div className="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><Link to="/">Home <FiArrowUpRight /></Link></li>
+            <li><Link to="/services">Services <FiArrowUpRight /></Link></li>
+            <li><Link to="/about">About <FiArrowUpRight /></Link></li>
+            <li><Link to="/how-it-works">How It Works <FiArrowUpRight /></Link></li>
+            <li><Link to="/clients">Clients <FiArrowUpRight /></Link></li>
+            <li><Link to="/contact-us">Contact <FiArrowUpRight /></Link></li>
+          </ul>
         </div>
 
         <div className="footer-col">
           <h4>Services</h4>
           <ul>
-            <li>Road Freight</li>
-            <li>Inbound Shipments</li>
-            <li>Cross Border</li>
-            <li>Express Delivery</li>
+            <li><Link to="/services">Road Freight <FiArrowUpRight /></Link></li>
+            <li><Link to="/services">Inbound Shipments <FiArrowUpRight /></Link></li>
+            <li><Link to="/services">Cross Border <FiArrowUpRight /></Link></li>
+            <li><Link to="/services">Express Delivery <FiArrowUpRight /></Link></li>
           </ul>
         </div>
 
-        <div className="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/how-it-works">How It Works</Link></li>
-            <li><Link to="/clients">Clients</Link></li>
-            <li><Link to="/tracking">Track Shipment</Link></li>
-          </ul>
-        </div>
-
-        <div className="footer-col">
+        <div className="footer-col footer-contact">
           <h4>Contact</h4>
 
           <div className="footer-contact-item">
-            <span>📍</span>
-            <span>Global Logistics Hub</span>
+            <FiMapPin />
+            <span>100 King Street West, Toronto, ON M5X 1A9, Canada</span>
           </div>
 
           <div className="footer-contact-item">
-            <span>📞</span>
-            <span>24/7 Support</span>
+            <FiPhone />
+            <span>+1 (416) 555-0198<br />+1 (647) 555-0147</span>
           </div>
 
           <div className="footer-contact-item">
-            <span>✉️</span>
-            <span>info@movexolog.com</span>
+            <FiMail />
+            <span>info@movexolog.com<br />support@movexolog.com</span>
           </div>
         </div>
-
       </div>
 
       <div className="footer-bottom">
-        <span>© 2026 MOVEXOLOG</span>
+        <span>© 2026 MOVEXOLOG. All Rights Reserved.</span>
         <div>
-          <a>Privacy</a>
-          <a>Terms</a>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
         </div>
       </div>
     </footer>

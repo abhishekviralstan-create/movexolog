@@ -12,3 +12,13 @@ body,
 body {
   font-family: 'Poppins', sans-serif;
 }
+.breadcrumb {
+  display: flex;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+.breadcrumb .sep {
+  color: #e00000;
+}

@@ -59,7 +59,7 @@ export default function AboutUs() {
       <main>
         <section className="about-hero">
           <div className="about-hero-content">
-            <span className="about-kicker">ABOUT US</span>
+            <span className="about-kicker">Home  <span className="sep">&gt;</span> ABOUT US</span>
             <h1>Trusted Logistics for a Modern World</h1>
             <p>
               We provide solutions across industries as a global logistics provider you can trust to deliver.

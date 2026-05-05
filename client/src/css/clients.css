@@ -1,0 +1,324 @@
+.clients-page {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+.clients-page * {
+  box-sizing: border-box;
+}
+
+.clients-hero {
+  display: flex;
+  color: #fff;
+  position: relative;
+  min-height: 90vh;
+  align-items: center;
+  padding: 120px 6% 80px;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)),
+    url("../assets/herobg.png") center/cover no-repeat;
+}
+
+.clients-hero-content {
+  max-width: 880px;
+}
+
+.clients-kicker {
+  display: inline-block;
+  color: #e00000;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.clients-hero h1,
+.clients-intro h2,
+.trust-content h2,
+.section-head h2,
+.message-card h2,
+.clients-cta h2 {
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: 1.08;
+  margin: 0 0 22px;
+  font-weight: 900;
+}
+
+.clients-hero p {
+  color: #d8d8d8;
+  max-width: 760px;
+  line-height: 1.8;
+}
+
+.clients-intro,
+.client-types-section,
+.client-trust-section,
+.client-stats-section,
+.client-message-section,
+.clients-cta {
+  padding: 90px 6%;
+}
+
+.clients-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+  align-items: center;
+}
+
+.clients-intro p,
+.client-card p,
+.trust-content p,
+.message-card p {
+  color: #666;
+  line-height: 1.8;
+  font-size: 0.98rem;
+}
+
+.client-types-section,
+.client-stats-section {
+  background: #f5f6f8;
+}
+
+.client-types-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.client-card {
+  position: relative;
+  background: #fff;
+  padding: 34px;
+  border-radius: 16px;
+  border-top: 3px solid #e00000;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.client-icon {
+  width: 68px;
+  height: 68px;
+  background: rgba(224, 0, 0, 0.08);
+  color: #e00000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  margin-bottom: 22px;
+}
+
+.clients-svg-icon {
+  width: 36px;
+  height: 36px;
+  color: inherit;
+}
+
+.client-count {
+  position: absolute;
+  right: 22px;
+  top: 18px;
+  font-size: 3.6rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.05);
+}
+
+.client-card h3 {
+  font-size: 1.22rem;
+  margin: 0 0 12px;
+}
+
+.client-trust-section {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 45px;
+  align-items: center;
+  background: #111;
+  color: #fff;
+}
+
+.trust-content p {
+  color: #bdbdbd;
+}
+
+.trust-points {
+  display: grid;
+  gap: 16px;
+}
+
+.trust-point {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border-left: 4px solid #e00000;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.trust-point .clients-svg-icon {
+  color: #e00000;
+  width: 26px;
+  height: 26px;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 55px;
+}
+
+.client-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.client-stat {
+  background: #fff;
+  padding: 34px;
+  border-radius: 16px;
+  text-align: center;
+  border-bottom: 4px solid #e00000;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.client-stat h3 {
+  color: #e00000;
+  font-size: 2.4rem;
+  margin: 0 0 10px;
+}
+
+.client-stat p {
+  margin: 0;
+  color: #555;
+  font-weight: 700;
+}
+
+.client-message-section {
+  background: #fff;
+}
+
+.message-card {
+  max-width: 980px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #e00000, #990000);
+  color: #fff;
+  padding: 50px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.message-card p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.clients-cta {
+  background: #e00000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+}
+
+.clients-cta span {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.clients-cta h2 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  margin: 8px 0 0;
+}
+
+.clients-cta a {
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  padding: 16px 30px;
+  border-radius: 35px;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .clients-hero {
+    min-height: auto;
+    padding: 120px 5% 75px;
+  }
+
+  .clients-intro,
+  .client-types-section,
+  .client-trust-section,
+  .client-stats-section,
+  .client-message-section,
+  .clients-cta {
+    padding: 75px 5%;
+  }
+
+  .clients-intro,
+  .client-types-grid,
+  .client-trust-section,
+  .client-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clients-hero-content,
+  .clients-intro,
+  .client-card,
+  .trust-content,
+  .trust-points,
+  .clients-cta {
+    text-align: center;
+  }
+
+  .client-icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .trust-point {
+    justify-content: center;
+  }
+
+  .clients-cta {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .clients-hero h1,
+  .clients-intro h2,
+  .trust-content h2,
+  .section-head h2,
+  .message-card h2 {
+    font-size: 2.15rem;
+  }
+
+  .client-card,
+  .message-card,
+  .client-stat {
+    padding: 28px 22px;
+  }
+
+  .trust-point {
+    flex-direction: column;
+  }
+
+  .clients-cta a {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}

@@ -3,43 +3,29 @@ import Header from "../components/navbar";
 import "../css/our-services.css";
 
 const services = [
-  {
-    icon: "🚛",
-    title: "Road Freight",
-    desc: "Reliable road transport for regional and long-distance cargo movement with planned routes, safe handling and on-time delivery support.",
-  },
-  {
-    icon: "📦",
+   {
+    icon: "box",
     title: "Inbound Shipments",
     desc: "Smooth inbound logistics designed to keep your warehouse, supply chain and business operations running without unnecessary delays.",
   },
   {
-    icon: "🌍",
+    icon: "road",
+    title: "Road Freight",
+    desc: "Reliable road transport for regional and long-distance cargo movement with planned routes, safe handling and on-time delivery support.",
+  },
+ 
+  {
+    icon: "globe",
     title: "Cross Border Shipments",
     desc: "Smart international freight movement with documentation support, customs-focused coordination and clear shipment visibility.",
-  },
-  {
-    icon: "⚡",
-    title: "Express Delivery",
-    desc: "Fast movement for urgent shipments where speed, safety and accurate communication matter the most.",
-  },
-  {
-    icon: "📡",
-    title: "Real-Time Tracking",
-    desc: "Shipment visibility that helps you monitor movement, route progress and delivery status with more confidence.",
-  },
-  {
-    icon: "🛡️",
-    title: "Secure Cargo Handling",
-    desc: "Careful handling processes focused on protecting cargo quality, reducing risk and improving delivery reliability.",
-  },
+  }
 ];
 
 const process = [
-  "Share your shipment details",
-  "Get a planned logistics solution",
-  "Confirm booking and documentation",
-  "Track dispatch to final delivery",
+  ["details", "Share your shipment details"],
+  ["plan", "Get a planned logistics solution"],
+  ["check", "Confirm booking and documentation"],
+  ["truck", "Track dispatch to final delivery"],
 ];
 
 export default function Services() {
@@ -79,14 +65,7 @@ export default function Services() {
               name: "Movexolog",
               url: "https://yourdomain.com/",
             },
-            serviceType: [
-              "Road Freight",
-              "Inbound Shipments",
-              "Cross Border Shipments",
-              "Express Delivery",
-              "Real-Time Tracking",
-              "Secure Cargo Handling",
-            ],
+            serviceType: services.map((item) => item.title),
             areaServed: "Worldwide",
             description:
               "Movexolog provides road freight, inbound logistics, cross-border shipment, express delivery and cargo handling services.",
@@ -99,7 +78,7 @@ export default function Services() {
       <main>
         <section className="services-hero">
           <div className="services-hero-content">
-            <span className="services-kicker">Our Services</span>
+            <span className="services-kicker">Home  <span className="sep">&gt;</span>  Our Services</span>
             <h1>Reliable Logistics Solutions Built for Every Move</h1>
             <p>
               From road freight to cross-border shipments, Movexolog helps businesses move cargo with better planning,
@@ -109,7 +88,7 @@ export default function Services() {
         </section>
 
         <section className="services-intro">
-          <div className="intro-left">
+          <div>
             <span className="services-kicker">What We Offer</span>
             <h2>End-to-End Logistics That Keep Your Business Moving</h2>
           </div>
@@ -119,11 +98,13 @@ export default function Services() {
           </p>
         </section>
 
-        <section className="services-list">
+        <section id="services-list" className="services-list">
           <div className="services-grid">
             {services.map((service, index) => (
               <div className="service-box" key={service.title}>
-                <div className="service-icon">{service.icon}</div>
+                <div className="service-icon">
+                  <Icon name={service.icon} />
+                </div>
                 <span className="service-count">{String(index + 1).padStart(2, "0")}</span>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
@@ -143,8 +124,11 @@ export default function Services() {
           </div>
 
           <div className="process-grid">
-            {process.map((item, index) => (
+            {process.map(([icon, item], index) => (
               <div className="process-card" key={item}>
+                <div className="process-icon">
+                  <Icon name={icon} />
+                </div>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{item}</h3>
               </div>
@@ -164,10 +148,10 @@ export default function Services() {
           </div>
 
           <div className="benefit-points">
-            <div>Trusted partner network</div>
-            <div>Clear shipment communication</div>
-            <div>Scalable freight support</div>
-            <div>Reliable delivery planning</div>
+            <div><Icon name="network" /> Trusted partner network</div>
+            <div><Icon name="chat" /> Clear shipment communication</div>
+            <div><Icon name="scale" /> Scalable freight support</div>
+            <div><Icon name="route" /> Reliable delivery planning</div>
           </div>
         </section>
 
@@ -180,5 +164,36 @@ export default function Services() {
         </section>
       </main>
     </div>
+  );
+}
+
+function Icon({ name }) {
+  const icons = {
+    road: "M3 17h18M5 17l2-8h10l2 8M9 17l1-8M15 17l-1-8M7 21h10",
+    box: "M4 7l8-4 8 4-8 4-8-4zm0 0v10l8 4 8-4V7",
+    globe: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm-4-10h8m-8 0c0 4 2 8 4 8s4-4 4-8m-8 0c0-4 2-8 4-8s4 4 4 8",
+    bolt: "M13 2L4 14h7l-1 8 10-13h-7l1-7z",
+    radar: "M12 20v-2m0-4v-2m0-4V6m-7 8a7 7 0 0 1 14 0M2 14a10 10 0 0 1 20 0",
+    shield: "M12 2l7 3v6c0 5-3 9-7 11-4-2-7-6-7-11V5l7-3z",
+    details: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
+    plan: "M9 18l6-12M4 6h16M4 18h16M7 6l2 12m8-12l-2 12",
+    check: "M20 6L9 17l-5-5",
+    truck: "M3 7h11v8H3V7zm11 3h3l3 3v2h-6v-5z M7 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+    network: "M12 12l7-4M12 12l-7-4M12 12v8M5 8V4h4m10 4V4h-4M9 20h6",
+    chat: "M21 12a8 8 0 0 1-8 8H7l-4 3v-6a8 8 0 1 1 18-5z",
+    scale: "M12 3v18M5 7h14M6 7l-3 6h6L6 7zm12 0l-3 6h6l-3-6z",
+    route: "M6 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12-8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8.5 14.5l7-5",
+  };
+
+  return (
+    <svg className="service-svg-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d={icons[name]}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

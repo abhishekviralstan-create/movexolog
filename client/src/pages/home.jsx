@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/navbar";
 import "../css/home.css";
-
-const truckVideo =
-  "https://cdn.coverr.co/videos/coverr-a-truck-on-a-highway-7916/1080p.mp4";
+import truckVideo from '../assets/1sthero.mp4';
+import { FaTruck } from "react-icons/fa";
 
 const whatWeProvide = [
   {
@@ -63,7 +62,7 @@ const focusItems = [
   {
     iconType: "shield",
     title: "Security & Trust",
-    desc: "Your cargo matters. We treat every shipment with care and keep it safe, gaining your trust at each stage in",
+    desc: "Your cargo matters. We treat every shipment with care and keep it safe, gaining your trust at each stage.",
   },
   {
     iconType: "truck",
@@ -73,14 +72,29 @@ const focusItems = [
 ];
 
 const stats = [
-  ["truck", "12000", "Deliveries Last Year"],
-  ["box", "5500", "Load Moved Last Year"],
-  ["globe", "2300", "Load Moved Last Year"],
-  ["truck", "4200", "Load Moved Last Year"],
+  ["truck", 12000, "Deliveries Last Year"],
+  ["box", 5500, "Load Moved Last Year"],
+  ["globe", 2300, "Load Moved Last Year"],
+  ["truck", 4200, "Load Moved Last Year"],
 ];
 
 export default function Home() {
   const [testimonialPage, setTestimonialPage] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTestimonialPage((prev) => {
+        if (window.innerWidth <= 600) {
+          // mobile → 1 by 1
+          return (prev + 1) % testimonials.length;
+        } else {
+          // desktop → 3 cards logic
+          return prev + 3 >= testimonials.length ? 0 : prev + 1;
+        }
+      });
+    }, 10000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const testimonialSlides = testimonials.map((_, index) => [
     testimonials[index % testimonials.length],
@@ -88,110 +102,94 @@ export default function Home() {
     testimonials[(index + 2) % testimonials.length],
   ]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTestimonialPage((prev) => (prev + 1) % testimonialSlides.length);
-    }, 10000);
-
-    return () => clearInterval(timer);
-  }, [testimonialSlides.length]);
-
   return (
     <div className="movexolog-page">
+      <Helmet>
+        <title>Movexolog Logistics | Dispatch to Delivery Global Transport Solutions</title>
+
+        <meta
+          name="description"
+          content="Movexolog offers reliable logistics, road freight, inbound shipments and cross-border transportation solutions."
+        />
+
+        <meta
+          name="keywords"
+          content="logistics company, road freight, cross border shipping, inbound logistics, transport services, shipment tracking, freight services India, global logistics, supply chain solutions"
+        />
+
+        <meta name="author" content="Movexolog" />
+        <meta name="publisher" content="Movexolog Logistics" />
+        <meta name="robots" content="index, follow" />
+
+        <link rel="canonical" href="https://yourdomain.com/" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Movexolog Logistics | Dispatch to Delivery" />
+        <meta
+          property="og:description"
+          content="Efficient logistics and transportation solutions with real-time tracking, global delivery and trusted supply chain management."
+        />
+        <meta property="og:url" content="https://yourdomain.com/" />
+        <meta property="og:image" content="https://yourdomain.com/preview.jpg" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Movexolog Logistics" />
+        <meta
+          name="twitter:description"
+          content="Reliable logistics, freight and shipment services worldwide."
+        />
+        <meta name="twitter:image" content="https://yourdomain.com/preview.jpg" />
+
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.placename" content="India" />
+        <meta name="theme-color" content="#cc0000" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Movexolog",
+            url: "https://yourdomain.com/",
+            logo: "https://yourdomain.com/logo.png",
+            sameAs: [
+              "https://facebook.com/",
+              "https://instagram.com/",
+              "https://linkedin.com/",
+            ],
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+91-0000000000",
+              contactType: "customer service",
+              areaServed: "Worldwide",
+              availableLanguage: ["English"],
+            },
+          })}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LogisticsBusiness",
+            name: "Movexolog Logistics",
+            image: "https://yourdomain.com/logo.png",
+            url: "https://yourdomain.com/",
+            telephone: "+91-0000000000",
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "IN",
+            },
+            areaServed: "Worldwide",
+            description:
+              "Movexolog provides logistics, freight, inbound shipments and cross-border transportation services globally.",
+          })}
+        </script>
+      </Helmet>
+
       <Header />
 
       <main>
-        <Helmet>
-  {/* BASIC SEO */}
-  <title>Movexolog Logistics | Dispatch to Delivery Global Transport Solutions</title>
-
-  <meta
-    name="description"
-    content="Movexolog offers reliable logistics, road freight, inbound shipments and cross-border transportation solutions."
-  />
-
-  <meta
-    name="keywords"
-    content="logistics company, road freight, cross border shipping, inbound logistics, transport services, shipment tracking, freight services India, global logistics, supply chain solutions"
-  />
-
-  <meta name="author" content="Movexolog" />
-  <meta name="publisher" content="Movexolog Logistics" />
-
-  {/* ROBOTS */}
-  <meta name="robots" content="index, follow" />
-
-  {/* CANONICAL */}
-  <link rel="canonical" href="https://yourdomain.com/" />
-
-  {/* OPEN GRAPH (Facebook + Social) */}
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Movexolog Logistics | Dispatch to Delivery" />
-  <meta
-    property="og:description"
-    content="Efficient logistics and transportation solutions with real-time tracking, global delivery and trusted supply chain management."
-  />
-  <meta property="og:url" content="https://yourdomain.com/" />
-  <meta property="og:image" content="https://yourdomain.com/preview.jpg" />
-
-  {/* TWITTER SEO */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Movexolog Logistics" />
-  <meta
-    name="twitter:description"
-    content="Reliable logistics, freight and shipment services worldwide."
-  />
-  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg" />
-
-  {/* GEO (Optional but good) */}
-  <meta name="geo.region" content="IN" />
-  <meta name="geo.placename" content="India" />
-
-  {/* THEME COLOR */}
-  <meta name="theme-color" content="#cc0000" />
-
-  {/* SCHEMA (VERY IMPORTANT) */}
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Movexolog",
-      "url": "https://yourdomain.com/",
-      "logo": "https://yourdomain.com/logo.png",
-      "sameAs": [
-        "https://facebook.com/",
-        "https://instagram.com/",
-        "https://linkedin.com/"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-0000000000",
-        "contactType": "customer service",
-        "areaServed": "Worldwide",
-        "availableLanguage": ["English"]
-      }
-    })}
-  </script>
-
-  {/* LOCAL BUSINESS SCHEMA */}
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LogisticsBusiness",
-      "name": "Movexolog Logistics",
-      "image": "https://yourdomain.com/logo.png",
-      "url": "https://yourdomain.com/",
-      "telephone": "+91-0000000000",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IN"
-      },
-      "areaServed": "Worldwide",
-      "description":
-        "Movexolog provides logistics, freight, inbound shipments and cross-border transportation services globally."
-    })}
-  </script>
-</Helmet>
         <section className="hero">
           <video className="hero-video" autoPlay muted loop playsInline>
             <source src={truckVideo} type="video/mp4" />
@@ -204,17 +202,17 @@ export default function Home() {
               <Icon type="globe" /> GLOBAL LOGISTICS LEADER
             </div>
 
-            <h1>Dispatch to Delivery — MOVEXOLOG</h1>
+            <h1>Dispatch to Delivery MOVEXOLOG</h1>
 
             <p>
               Efficient, reliable and real-world logistics solutions built on over ten years of industry expertise.
             </p>
 
             <div className="hero-buttons">
-              <a href="#quote" className="btn-primary">
-                Request A Quotes
+              <a href="/contact-us" className="btn-primary">
+                Contact Us
               </a>
-              <a href="#about" className="btn-outline">
+              <a href="/about" className="btn-outline">
                 About Us
               </a>
             </div>
@@ -240,7 +238,7 @@ export default function Home() {
           </div>
           <div className="brand-item">
             <Icon type="shield" />
-            <span>express</span>
+            <span>Express</span>
           </div>
           <div className="brand-item">
             <Icon type="truck" />
@@ -274,8 +272,8 @@ export default function Home() {
         </section>
 
         <section id="about" className="white-section">
-          <div className="two-grid about-grid">
-            <div>
+          <div className="about-row">
+            <div className="about-col-8">
               <div className="section-label">ABOUT US</div>
               <h2 className="section-title">Trusted by Every Mile We Deliver</h2>
 
@@ -288,18 +286,20 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="skills-card">
-              <span className="big-bg-number">About</span>
+            <div className="about-col-4">
+              <div className="skills-card">
+                <span className="big-bg-number">About</span>
 
-              <h3>Our Professional Experience & Skills</h3>
+                <h3>Our Professional Experience & Skills</h3>
 
-              <Skill title="Road Freight" width="85%" />
-              <Skill title="Cross Border" width="72%" />
-              <Skill title="Inbound" width="80%" />
+                <Skill title="Road Freight" width="85%" />
+                <Skill title="Cross Border" width="72%" />
+                <Skill title="Inbound" width="80%" />
 
-              <a href="#quote" className="skill-btn">
-                Appointment <Icon type="plane" />
-              </a>
+                <a href="/contact-us" className="skill-btn">
+                  Appointment <Icon type="plane" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -348,6 +348,38 @@ export default function Home() {
           </div>
         </section>
 
+
+
+        <section className="stats-section">
+          <SectionHeader
+            label="Company Statistics"
+            title="We Are Professional Logistics & Transportations Agency"
+            sub=""
+            centered
+          />
+
+          <div className="company-stats-grid">
+            {stats.map(([icon, num, label]) => (
+              <div className="company-stat-card" key={num}>
+                <div className="stat-icon">
+                  <Icon type={icon} />
+                </div>
+
+                <h3>
+                  <Counter end={num} />
+                  <sup>+</sup>
+                </h3>
+
+                <p>{label}</p>
+
+                <div className="stat-line">
+                  <span />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section id="quote" className="quote-section">
           <SectionHeader
             label="Request a Quote"
@@ -391,36 +423,6 @@ export default function Home() {
           </form>
         </section>
 
-        <section className="stats-section">
-          <SectionHeader
-            label="Company Statistics"
-            title="We Are Professional Logistics & Transportations Agency"
-            sub=""
-            centered
-          />
-
-          <div className="company-stats-grid">
-            {stats.map(([icon, num, label]) => (
-              <div className="company-stat-card" key={num}>
-                <div className="stat-icon">
-                  <Icon type={icon} />
-                </div>
-
-                <h3>
-                  {num}
-                  <sup>+</sup>
-                </h3>
-
-                <p>{label}</p>
-
-                <div className="stat-line">
-                  <span />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section className="white-section">
           <SectionHeader
             label="Our Testimonials"
@@ -431,52 +433,66 @@ export default function Home() {
 
           <div className="testimonial-slider">
             <div className="testimonials-grid">
-              {testimonialSlides[testimonialPage].map((item, index) => (
-                <div className="testimonial-card" key={`${item.name}-${index}`}>
-                  <div className="stars">★★★★★</div>
+              {testimonials.map((item, index) => {
+                const isActive =
+                  window.innerWidth <= 600
+                    ? index === testimonialPage // mobile → 1
+                    : index >= testimonialPage && index < testimonialPage + 3; // desktop → 3
 
-                  <p>{item.text}</p>
+                return (
+                  <div
+                    className={`testimonial-card ${isActive ? "active" : ""}`}
+                    key={item.name}
+                  >
+                    <div className="stars">★★★★★</div>
 
-                  <div className="testimonial-author">
-                    <div className="author-avatar">{item.name.slice(0, 2)}</div>
+                    <p>{item.text}</p>
 
-                    <div className="author-info">
-                      <strong>{item.name}</strong>
-                      <span>{item.role}</span>
+                    <div className="testimonial-author">
+                      <div className="author-avatar">
+                        {item.name.slice(0, 2)}
+                      </div>
+
+                      <div className="author-info">
+                        <strong>{item.name}</strong>
+                        <span>{item.role}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="testimonial-dots">
-              {testimonialSlides.map((_, index) => (
+              {testimonials.map((_, index) => (
                 <button
                   key={index}
                   type="button"
                   className={testimonialPage === index ? "active" : ""}
                   onClick={() => setTestimonialPage(index)}
-                  aria-label={`Show testimonial group ${index + 1}`}
                 />
               ))}
             </div>
           </div>
         </section>
 
-        <section className="home-cta">
-          <div>
-            <small>Our Newsletters</small>
-            <h2>Don’t Miss Our Offer Tips & Much More</h2>
-          </div>
+   <section className="home-cta">
+  <div>
+    <small>Our Newsletters</small>
+    <h2>Don’t Miss Our Offer Tips & Much More</h2>
+  </div>
 
-          <form>
-            <button type="submit">Get Free Quote Now</button>
-          </form>
+  <form>
+    <a href="/contact-us" className="skill-btn2">
+      Get Free Quote
+    </a>
+  </form>
 
-          <div className="cta-truck">
-            <Icon type="truck" />
-          </div>
-        </section>
+  {/* 🚚 Truck Icon */}
+  <div className="cta-truck">
+    <FaTruck />
+  </div>
+</section>
       </main>
     </div>
   );
@@ -511,6 +527,32 @@ function Skill({ title, width }) {
       </div>
     </div>
   );
+}
+
+function Counter({ end }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 1800;
+    const stepTime = 20;
+    const increment = end / (duration / stepTime);
+
+    const timer = setInterval(() => {
+      start += increment;
+
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [end]);
+
+  return count.toLocaleString();
 }
 
 function Icon({ type }) {

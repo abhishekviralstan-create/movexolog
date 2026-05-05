@@ -1,31 +1,32 @@
-.services-page {
+.how-page {
   font-family: "Poppins", "Segoe UI", sans-serif;
   background: #fff;
   color: #1a1a1a;
   overflow-x: hidden;
 }
 
-.services-page * {
+.how-page * {
   box-sizing: border-box;
 }
 
-.services-hero {
-  min-height: 72vh;
-  padding: 140px 6% 90px;
+.how-hero {
   display: flex;
-  align-items: center;
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.96), rgba(10, 0, 0, 0.82)),
-    radial-gradient(circle at right, rgba(224, 0, 0, 0.26), transparent 42%),
-    #060606;
   color: #fff;
+  position: relative;
+  min-height: 90vh;
+  align-items: center;
+  padding: 120px 6% 80px;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)),
+    url("../assets/herobg.png") center/cover no-repeat;
 }
 
-.services-hero-content {
-  max-width: 860px;
+.how-hero-content {
+  max-width: 880px;
 }
 
-.services-kicker {
+.how-kicker {
   display: inline-block;
   color: #e00000;
   font-size: 0.78rem;
@@ -35,24 +36,25 @@
   margin-bottom: 14px;
 }
 
-.services-hero h1,
-.services-intro h2,
+.how-hero h1,
+.how-intro h2,
 .section-head h2,
-.benefit-card h2,
-.services-cta h2 {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+.benefit-left h2,
+.quality-card h2,
+.how-cta h2 {
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
   line-height: 1.08;
   margin: 0 0 22px;
   font-weight: 900;
 }
 
-.services-hero p {
+.how-hero p {
   color: #d8d8d8;
   max-width: 760px;
   line-height: 1.8;
 }
 
-.services-hero-actions {
+.how-actions {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
@@ -83,15 +85,16 @@
   color: #fff;
 }
 
-.services-intro,
-.services-list,
-.service-process,
-.service-benefits,
-.services-cta {
+.how-intro,
+.steps-section,
+.timeline-section,
+.benefits-section,
+.quality-section,
+.how-cta {
   padding: 90px 6%;
 }
 
-.services-intro {
+.how-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 55px;
@@ -99,40 +102,27 @@
   background: #fff;
 }
 
-.services-intro p,
+.how-intro p,
 .section-head p,
-.benefit-card p,
-.service-box p {
+.step-card p,
+.benefit-left p,
+.quality-card p {
   color: #666;
   line-height: 1.8;
   font-size: 0.98rem;
 }
 
-.services-list {
+.steps-section {
   background: #f5f6f8;
 }
 
-.services-hero {
-  position: relative;
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  padding: 120px 6% 80px;
-
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)),
-    url("../assets/herobg.png") center/cover no-repeat;
-
-  color: #fff;
-}
-
-.services-grid {
+.steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
-.service-box {
+.step-card {
   position: relative;
   background: #fff;
   padding: 38px;
@@ -143,12 +133,11 @@
   transition: 0.25s ease;
 }
 
-.service-box:hover {
+.step-card:hover {
   transform: translateY(-8px);
 }
 
-.service-icon,
-.process-icon {
+.step-icon {
   width: 68px;
   height: 68px;
   background: rgba(224, 0, 0, 0.08);
@@ -160,13 +149,13 @@
   margin-bottom: 22px;
 }
 
-.service-svg-icon {
+.how-icon {
   width: 36px;
   height: 36px;
   color: inherit;
 }
 
-.service-count {
+.step-count {
   position: absolute;
   right: 24px;
   top: 22px;
@@ -176,12 +165,12 @@
   line-height: 1;
 }
 
-.service-box h3 {
-  font-size: 1.3rem;
+.step-card h3 {
+  font-size: 1.28rem;
   margin: 0 0 12px;
 }
 
-.service-process {
+.timeline-section {
   background: #111;
   color: #fff;
 }
@@ -192,36 +181,55 @@
   margin: 0 auto 55px;
 }
 
-.process-grid {
+.timeline-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 29px;
+  width: 2px;
+  height: 100%;
+  background: rgba(224, 0, 0, 0.5);
+}
+
+.timeline-item {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  margin-bottom: 30px;
+  position: relative;
 }
 
-.process-card {
-  background: rgba(255, 255, 255, 0.06);
-  padding: 30px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  text-align: center;
-}
-
-.process-icon {
-  margin: 0 auto 18px;
-}
-
-.process-card span {
-  color: #e00000;
-  font-size: 2.2rem;
+.timeline-dot {
+  width: 60px;
+  height: 60px;
+  background: #e00000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 900;
+  z-index: 1;
 }
 
-.process-card h3 {
-  font-size: 1rem;
-  line-height: 1.5;
+.timeline-item h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
 }
 
-.service-benefits {
+.timeline-item p {
+  color: #bbb;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.benefits-section {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 45px;
@@ -229,18 +237,12 @@
   background: #fff;
 }
 
-.benefit-card {
-  background: #f5f6f8;
-  padding: 45px;
-  border-radius: 18px;
-}
-
-.benefit-points {
+.benefit-grid {
   display: grid;
   gap: 16px;
 }
 
-.benefit-points div {
+.benefit-item {
   background: #111;
   color: #fff;
   padding: 20px 24px;
@@ -252,14 +254,43 @@
   gap: 14px;
 }
 
-.benefit-points .service-svg-icon {
-  width: 24px;
-  height: 24px;
+.benefit-item .how-icon {
+  width: 26px;
+  height: 26px;
   color: #e00000;
   flex-shrink: 0;
 }
 
-.services-cta {
+.quality-section {
+  background: #f5f6f8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.quality-card {
+  background: #fff;
+  padding: 45px;
+  border-radius: 18px;
+  border-top: 3px solid #e00000;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.quality-points {
+  display: grid;
+  gap: 16px;
+}
+
+.quality-points div {
+  background: #fff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  font-weight: 800;
+  border-left: 4px solid #e00000;
+}
+
+.how-cta {
   background: #e00000;
   color: #fff;
   display: flex;
@@ -268,19 +299,19 @@
   gap: 25px;
 }
 
-.services-cta span {
+.how-cta span {
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-.services-cta h2 {
+.how-cta h2 {
   font-size: clamp(1.7rem, 4vw, 3rem);
   margin: 8px 0 0;
 }
 
-.services-cta a {
+.how-cta a {
   background: #111;
   color: #fff;
   text-decoration: none;
@@ -292,49 +323,52 @@
 }
 
 @media (max-width: 991px) {
-  .services-hero {
+  .how-hero {
     min-height: auto;
     padding: 120px 5% 75px;
   }
 
-  .services-intro,
-  .services-list,
-  .service-process,
-  .service-benefits,
-  .services-cta {
+  .how-intro,
+  .steps-section,
+  .timeline-section,
+  .benefits-section,
+  .quality-section,
+  .how-cta {
     padding: 75px 5%;
   }
 
-  .services-intro,
-  .services-grid,
-  .process-grid,
-  .service-benefits {
+  .how-intro,
+  .steps-grid,
+  .benefits-section,
+  .quality-section {
     grid-template-columns: 1fr;
   }
 
-  .services-hero-content,
-  .services-intro,
-  .service-box,
-  .benefit-card,
-  .benefit-points,
-  .services-cta {
+  .how-hero-content,
+  .how-intro,
+  .step-card,
+  .benefit-left,
+  .benefit-grid,
+  .quality-card,
+  .quality-points,
+  .how-cta {
     text-align: center;
   }
 
-  .services-hero-actions {
+  .how-actions {
     justify-content: center;
   }
 
-  .service-icon {
+  .step-icon {
     margin-left: auto;
     margin-right: auto;
   }
 
-  .benefit-points div {
+  .benefit-item {
     justify-content: center;
   }
 
-  .services-cta {
+  .how-cta {
     flex-direction: column;
     justify-content: center;
   }
@@ -342,33 +376,48 @@
 
 @media (max-width: 600px) {
 
-  .services-hero h1,
-  .services-intro h2,
+  .how-hero h1,
+  .how-intro h2,
   .section-head h2,
-  .benefit-card h2 {
+  .benefit-left h2,
+  .quality-card h2 {
     font-size: 2.15rem;
   }
 
-  .service-box,
-  .benefit-card,
-  .process-card {
+  .step-card,
+  .quality-card {
     padding: 28px 22px;
   }
 
-  .services-hero-actions {
+  .how-actions {
     flex-direction: column;
     align-items: center;
   }
 
   .primary-btn,
   .outline-btn,
-  .services-cta a {
+  .how-cta a {
     width: 100%;
     max-width: 280px;
     text-align: center;
   }
 
-  .benefit-points div {
+  .timeline-wrap::before {
+    left: 22px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    text-align: left;
+  }
+
+  .timeline-dot {
+    width: 44px;
+    height: 44px;
+  }
+
+  .benefit-item {
     flex-direction: column;
   }
 }

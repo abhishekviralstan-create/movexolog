@@ -29,15 +29,14 @@ export default function Navbar() {
         <li><NavLink to="/services" onClick={closeMenu}>Services</NavLink></li>
         <li><NavLink to="/about" onClick={closeMenu}>About</NavLink></li>
         <li><NavLink to="/how-it-works" onClick={closeMenu}>How It Works</NavLink></li>
-        <li><NavLink to="/tracking" onClick={closeMenu}>Track Shipment</NavLink></li>
         <li><NavLink to="/clients" onClick={closeMenu}>Clients</NavLink></li>
         <li className="site-mobile-cta">
-          <NavLink to="/tracking" onClick={closeMenu}>Get a Quote</NavLink>
+          <NavLink to="/contact-us" onClick={closeMenu}>Contact Us</NavLink>
         </li>
       </ul>
 
-      <Link to="/tracking" className="site-nav-cta">
-        Get a Quote
+      <Link to="/contact-us" className="site-nav-cta">
+       Contact Us
       </Link>
     </nav>
   );
