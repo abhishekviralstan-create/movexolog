@@ -10,6 +10,8 @@ import Services from "./pages/our-services.jsx";
 import HowItWorks from "./pages/how-it-works.jsx";
 import Footer from "./components/footer.jsx";
 import Contact from "./pages/contact-us.jsx";
+import Terms from "./pages/terms-and-conditions.jsx";
+import Privacy from "./pages/privacy-policy.jsx";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/contact-us" element={<Contact />}/>
+        <Route path="/terms-and-conditions" element={<Terms />}/>
+        <Route path="/privacy-policy" element={<Privacy />}/>
       </Routes>
       <Footer />
     </HelmetProvider>

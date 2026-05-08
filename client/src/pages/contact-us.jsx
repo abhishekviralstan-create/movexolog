@@ -1,137 +1,317 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/navbar";
 import "../css/contact-us.css";
 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzLDVj2aSOavD85mBB9L2MQAbNoA69t1GiZLgT-G3AUbqOlp4VBoMuCM1EISARgHm1/exec";
+
 export default function Contact() {
-    return (
-        <div className="contact-page">
-            <Helmet>
-                <title>Contact Movexolog | Get Logistics Support & Shipment Quote</title>
-                <link rel="icon" type="image/png" href="../assets/logo.png" />
-                <link rel="apple-touch-icon" href="../assets/logo.png" />
-                <meta
-                    name="description"
-                    content="Contact Movexolog for road freight, inbound shipments, cross-border logistics, shipment tracking support and customized freight quotes."
-                />
-                <meta
-                    name="keywords"
-                    content="contact Movexolog, logistics support, freight quote, shipment support, road freight contact, cross border logistics contact"
-                />
-                <meta name="robots" content="index, follow" />
-                <meta name="author" content="Movexolog" />
-                <meta name="publisher" content="Movexolog Logistics" />
-                <link rel="canonical" href="https://yourdomain.com/contact" />
-            </Helmet>
+    const [showPopup, setShowPopup] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-            <Header />
+  const [contactForm, setContactForm] = useState({
+    fullName: "",
+    company: "",
+    email: "",
+    phone: "",
+    serviceType: "Road Freight",
+    route: "",
+    details: "",
+  });
 
-            <main>
-                <section className="contact-hero">
-                    <div className="contact-hero-content">
-                        <span className="contact-kicker"> Home  <span className="sep">&gt;</span> Contact Us</span>
-                        <h1>Let’s Move Your Shipment With Confidence</h1>
-                        <p>
-                            Need a quote, shipment update or logistics support? Share your details and our team will help you with the right solution.
-                        </p>
-                    </div>
-                </section>
+  const handleContactChange = (e) => {
+    const { name, value } = e.target;
 
-                <section className="contact-section">
-                    <div className="contact-info">
-                        <span className="contact-kicker">Get In Touch</span>
-                        <h2>Support That Helps You Move Faster</h2>
-                        <p>
-                            From road freight to cross-border shipment support, Movexolog keeps communication simple, clear and responsive.
-                        </p>
+    setContactForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-                        <div className="contact-cards">
-                            <div className="contact-card">
-                                <Icon name="phone" />
-                                <h3>Call Support</h3>
-                                <p>24/7 logistics assistance available for shipment queries.</p>
-                            </div>
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
 
-                            <div className="contact-card">
-                                <Icon name="mail" />
-                                <h3>Email Us</h3>
-                                <p>info@movexolog.com</p>
-                            </div>
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YAHAN_APNA")) {
+      alert("Please add your Google Apps Script Web App URL first.");
+      return;
+    }
 
-                            <div className="contact-card">
-                                <Icon name="map" />
-                                <h3>Service Area</h3>
-                                <p>Global logistics and freight movement support.</p>
-                            </div>
-                        </div>
-                    </div>
+    setIsSubmitting(true);
 
-                    <form className="contact-form">
-                        <FormInput label="Full Name" placeholder="Your full name" />
-                        <FormInput label="Company" placeholder="Company name" />
-                        <FormInput label="Email Address" type="email" placeholder="your@email.com" />
-                        <FormInput label="Phone Number" placeholder="+1 000 000 0000" />
+    const formData = {
+      fullName: contactForm.fullName,
+      company: contactForm.company,
+      email: contactForm.email,
+      phone: contactForm.phone,
+      serviceType: contactForm.serviceType,
+      route: contactForm.route,
+      details: contactForm.details,
+      source: "Movexolog Contact Form",
+    };
 
-                        <div className="form-group">
-                            <label>Service Type</label>
-                            <select>
-                                <option>Road Freight</option>
-                                <option>Cross Border Shipments</option>
-                                <option>Inbound Shipments</option>
-                                <option>Express Delivery</option>
-                            </select>
-                        </div>
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-                        <FormInput label="Route / Destination" placeholder="Origin → Destination" />
+setShowPopup(true);
 
-                        <div className="form-group full">
-                            <label>Additional Details</label>
-                            <textarea placeholder="Cargo type, weight, special requirements..." />
-                        </div>
+      setContactForm({
+        fullName: "",
+        company: "",
+        email: "",
+        phone: "",
+        serviceType: "Road Freight",
+        route: "",
+        details: "",
+      });
+    } catch (error) {
+      console.error("Contact form submit error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-                        <button type="submit">Send Message</button>
-                    </form>
-                </section>
+  return (
+    <div className="contact-page">
+      <Helmet>
+        <title>Contact Movexolog | Get Logistics Support & Shipment Quote</title>
+        <link rel="icon" type="image/png" href="../assets/logo.png" />
+        <link rel="apple-touch-icon" href="../assets/logo.png" />
 
-                <section className="contact-cta">
-                    <div>
-                        <span>Need urgent shipment support?</span>
-                        <h2>Our team is ready to help you plan the next move.</h2>
-                    </div>
-                    <a href="/tracking">Track Shipment</a>
-                </section>
-            </main>
-        </div>
-    );
+        <meta
+          name="description"
+          content="Contact Movexolog for road freight, inbound shipments, cross-border logistics, shipment tracking support and customized freight quotes."
+        />
+        <meta
+          name="keywords"
+          content="contact Movexolog, logistics support, freight quote, shipment support, road freight contact, cross border logistics contact"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Movexolog" />
+        <meta name="publisher" content="Movexolog Logistics" />
+
+        <link rel="canonical" href="https://www.movexolog.com/contact" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "Contact Movexolog",
+            url: "https://www.movexolog.com/contact",
+            description:
+              "Contact Movexolog for road freight, inbound shipments, cross-border logistics, shipment tracking support and customized freight quotes.",
+            publisher: {
+              "@type": "Organization",
+              name: "Movexolog",
+              url: "https://www.movexolog.com",
+              logo: "https://www.movexolog.com/logo.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "info@movexolog.com",
+                contactType: "customer support",
+                areaServed: "Global",
+                availableLanguage: ["English"],
+              },
+            },
+            mainEntity: {
+              "@type": "Organization",
+              name: "Movexolog",
+              email: "info@movexolog.com",
+              url: "https://www.movexolog.com",
+              description:
+                "Movexolog provides logistics support for road freight, inbound shipments, cross-border shipments and express delivery.",
+            },
+          })}
+        </script>
+      </Helmet>
+
+      <Header />
+
+      <main>
+        <section className="contact-hero">
+          <div className="contact-hero-content">
+            <span className="contact-kicker">
+              Home <span className="sep">&gt;</span> Contact Us
+            </span>
+            <h1>Let’s Move Your Shipment With Confidence</h1>
+            <p>
+              Need a quote, shipment update or logistics support? Share your
+              details and our team will help you with the right solution.
+            </p>
+          </div>
+        </section>
+
+        <section className="contact-section">
+          <div className="contact-info">
+            <span className="contact-kicker">Get In Touch</span>
+            <h2>Support That Helps You Move Faster</h2>
+            <p>
+              Movexolog keeps communication simple, clear and responsive — from
+              road freight to cross-border shipment support.
+            </p>
+
+            <div className="contact-cards">
+              <div className="contact-card">
+                <Icon name="phone" />
+                <h3>Call Support</h3>
+                <p>Logistics details on your shipment are available 24/7.</p>
+              </div>
+
+              <div className="contact-card">
+                <Icon name="mail" />
+                <h3>Email Us</h3>
+                <p>info@movexolog.com</p>
+              </div>
+
+              <div className="contact-card">
+                <Icon name="map" />
+                <h3>Service Area</h3>
+                <p>
+                  They support the movement of freight and logistics around the
+                  world.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <form className="contact-form" onSubmit={handleContactSubmit}>
+            <FormInput
+              label="Full Name"
+              name="fullName"
+              value={contactForm.fullName}
+              onChange={handleContactChange}
+              placeholder="Your full name"
+              required
+            />
+
+            <FormInput
+              label="Company"
+              name="company"
+              value={contactForm.company}
+              onChange={handleContactChange}
+              placeholder="Company name"
+            />
+
+            <FormInput
+              label="Email Address"
+              type="email"
+              name="email"
+              value={contactForm.email}
+              onChange={handleContactChange}
+              placeholder="your@email.com"
+              required
+            />
+
+            <FormInput
+              label="Phone Number"
+              name="phone"
+              value={contactForm.phone}
+              onChange={handleContactChange}
+              placeholder="+1 000 000 0000"
+              required
+            />
+
+            <div className="form-group">
+              <label>Service Type</label>
+              <select
+                name="serviceType"
+                value={contactForm.serviceType}
+                onChange={handleContactChange}
+                required
+              >
+                <option value="Road Freight">Road Freight</option>
+                <option value="Cross Border Shipments">
+                  Cross Border Shipments
+                </option>
+                <option value="Inbound Shipments">Inbound Shipments</option>
+                <option value="Express Delivery">Express Delivery</option>
+              </select>
+            </div>
+
+            <FormInput
+              label="Route / Destination"
+              name="route"
+              value={contactForm.route}
+              onChange={handleContactChange}
+              placeholder="Origin → Destination"
+            />
+
+            <div className="form-group full">
+              <label>Additional Details</label>
+              <textarea
+                name="details"
+                value={contactForm.details}
+                onChange={handleContactChange}
+                placeholder="Cargo type, weight, special requirements..."
+              />
+            </div>
+
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Send Message"}
+            </button>
+          </form>
+          {showPopup && (
+  <div className="success-popup-overlay">
+    <div className="success-popup">
+      <h3>Form Submitted Successfully!</h3>
+
+      <p>
+        Thank you for contacting Movexolog. Our team will contact you soon.
+      </p>
+
+      <button onClick={() => setShowPopup(false)}>
+        Close
+      </button>
+    </div>
+  </div>
+)}
+        </section>
+
+        <section className="contact-cta">
+          <div>
+            <span>Need urgent shipment support?</span>
+            <h2>Our team is ready to help you plan the next move.</h2>
+          </div>
+          <a href="/tracking">Track Shipment</a>
+        </section>
+      </main>
+    </div>
+  );
 }
 
 function FormInput({ label, ...props }) {
-    return (
-        <div className="form-group">
-            <label>{label}</label>
-            <input {...props} />
-        </div>
-    );
+  return (
+    <div className="form-group">
+      <label>{label}</label>
+      <input {...props} />
+    </div>
+  );
 }
 
 function Icon({ name }) {
-    const icons = {
-        phone:
-            "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z",
-        mail:
-            "M4 4h16v16H4V4zm0 4l8 5 8-5",
-        map:
-            "M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3zm0 0V3m6 18V6",
-    };
+  const icons = {
+    phone:
+      "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z",
+    mail: "M4 4h16v16H4V4zm0 4l8 5 8-5",
+    map: "M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3zm0 0V3m6 18V6",
+  };
 
-    return (
-        <svg className="contact-icon" viewBox="0 0 24 24" fill="none">
-            <path
-                d={icons[name]}
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
+  return (
+    <svg className="contact-icon" viewBox="0 0 24 24" fill="none">
+      <path
+        d={icons[name]}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }

@@ -18,7 +18,7 @@ export default function AboutUs() {
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Movexolog" />
         <meta name="publisher" content="Movexolog Logistics" />
-        <link rel="canonical" href="https://yourdomain.com/about" />
+        <link rel="canonical" href="https://www.movexolog.com/about" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="About Movexolog | Trusted Global Logistics Provider" />
@@ -26,8 +26,8 @@ export default function AboutUs() {
           property="og:description"
           content="Movexolog provides reliable, scalable and performance-focused logistics solutions backed by trusted global partners."
         />
-        <meta property="og:url" content="https://yourdomain.com/about" />
-        <meta property="og:image" content="https://yourdomain.com/logo.png" />
+        <meta property="og:url" content="https://www.movexolog.com/about" />
+        <meta property="og:image" content="https://www.movexolog.com/logo.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Movexolog Logistics" />
@@ -35,18 +35,18 @@ export default function AboutUs() {
           name="twitter:description"
           content="Trusted logistics solutions for modern businesses with real-time tracking, express delivery and global freight support."
         />
-        <meta name="twitter:image" content="https://yourdomain.com/logo.png" />
+        <meta name="twitter:image" content="https://www.movexolog.com/logo.png" />
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "AboutPage",
             name: "About Movexolog",
-            url: "https://yourdomain.com/about",
+            url: "https://www.movexolog.com/about",
             publisher: {
               "@type": "Organization",
               name: "Movexolog",
-              logo: "https://yourdomain.com/logo.png",
+              logo: "https://www.movexolog.com/logo.png",
             },
             description:
               "Movexolog is a trusted global logistics provider delivering scalable, reliable and performance-oriented freight and supply chain solutions.",
@@ -107,16 +107,19 @@ export default function AboutUs() {
           <div className="about-two">
             <div>
               <span className="about-kicker">OUR APPROACH</span>
-              <h2>Simple Logistics. Smarter Movement.</h2>
+              <h2>Simple Logistics. Smarter Movement.
+              </h2>
               <p>
-                We believe logistics should feel clear, fast and dependable. From planning to delivery, our process
-                is built to reduce confusion, improve visibility and keep your cargo moving with fewer delays.
+                This is how we think logistics should feel – clear, quick and safe. From the planning stage to delivery, we develop our process in ways that can minimize confusion, enhance visibility & help keep your cargo moving with less lag.
+
               </p>
             </div>
 
             <div className="feature-list">
-              <div>Reliable freight planning</div>
-              <div>Clear communication</div>
+              <div>Reliable freight planning
+              </div>
+              <div>Clear communication
+              </div>
               <div>Trusted delivery network</div>
               <div>Scalable business support</div>
             </div>
@@ -127,15 +130,15 @@ export default function AboutUs() {
           <div className="about-two reverse">
             <div className="impact-box">
               <h3>10+ Years</h3>
-              <p>Industry-backed logistics knowledge and practical freight experience.</p>
+              <p>Industry Based Logistics Knowledge and Real-world freight experience.</p>
             </div>
 
             <div>
               <span className="about-kicker">OUR PEOPLE</span>
               <h2>Experienced Team. Responsible Operations.</h2>
               <p>
-                Behind every shipment is a team that understands timing, documentation, safety and customer support.
-                Our people focus on practical solutions, quick action and long-term trust.
+                There is a team behind every shipment that knows timing, documentation, safety and customer support. Our people deliver real world solutions, act with speed and gain trust for life.
+
               </p>
             </div>
           </div>
@@ -147,14 +150,16 @@ export default function AboutUs() {
               <span className="about-kicker">OUR PROMISE</span>
               <h2>Built for Businesses That Need Dependability.</h2>
               <p>
-                Whether it is road freight, inbound shipments or cross-border movement, we aim to deliver a service
-                that feels organized, transparent and accountable from the first call to final delivery.
+             Irrespective of type be it road freight, inbound shipments or cross-border movement by coming to you with organized, transparent and accountable service right from the first call till delivery.
+
               </p>
             </div>
 
             <div className="promise-card">
-              <h3>Performance-first logistics</h3>
-              <p>Focused on safe cargo movement, timely delivery and consistent customer support.</p>
+              <h3>Performance-first logistics
+</h3>
+              <p>An emphasis on the safe movement of cargo, timely delivery recall and a consistent support for customers.
+</p>
             </div>
           </div>
         </section>

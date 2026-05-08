@@ -6,22 +6,22 @@ const clientTypes = [
   {
     icon: "store",
     title: "Retail & E-Commerce",
-    desc: "Reliable shipment support for online stores, retail suppliers and growing commerce businesses.",
+    desc: "Trustful shipping assistance for open air internet business, retail providers and undertaking world.",
   },
   {
     icon: "factory",
     title: "Manufacturing",
-    desc: "Structured logistics for raw materials, finished goods and recurring supply chain movement.",
+    desc: "Raw materials and finished goods + the far more structured logistics of regular supply chain movement.",
   },
   {
     icon: "globe",
     title: "Import & Export",
-    desc: "Cross-border logistics coordination for businesses moving goods across regions and markets.",
+    desc: "Cross-border logistics scheduling for firms moving goods between regions and markets.",
   },
   {
     icon: "box",
     title: "Warehousing Partners",
-    desc: "Inbound and outbound movement support for warehouse-driven operations.",
+    desc: "Support for inbound and outbound movement for warehouse-driven operations.",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function Clients() {
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Movexolog" />
         <meta name="publisher" content="Movexolog Logistics" />
-        <link rel="canonical" href="https://yourdomain.com/clients" />
+        <link rel="canonical" href="https://www.movexolog.com/clients" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Movexolog Clients | Trusted Logistics Partner" />
@@ -56,21 +56,21 @@ export default function Clients() {
           property="og:description"
           content="Explore how Movexolog supports businesses with reliable, scalable and transparent logistics services."
         />
-        <meta property="og:url" content="https://yourdomain.com/clients" />
-        <meta property="og:image" content="https://yourdomain.com/logo.png" />
+        <meta property="og:url" content="https://www.movexolog.com/clients" />
+        <meta property="og:image" content="https://www.movexolog.com/logo.png" />
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
             name: "Movexolog Clients",
-            url: "https://yourdomain.com/clients",
+            url: "https://www.movexolog.com/clients",
             description:
               "Movexolog works with clients across retail, manufacturing, import-export and warehouse operations.",
             publisher: {
               "@type": "Organization",
               name: "Movexolog",
-              logo: "https://yourdomain.com/logo.png",
+              logo: "https://www.movexolog.com/logo.png",
             },
           })}
         </script>
@@ -93,12 +93,11 @@ export default function Clients() {
         <section className="clients-intro">
           <div>
             <span className="clients-kicker">Who We Support</span>
-            <h2>Logistics Support for Growing and Established Businesses</h2>
+            <h2>Built to Support Growing & Established Businesses</h2>
           </div>
           <p>
-            Our clients rely on practical logistics planning, strong partner coordination
-            and responsive support. Whether it is a regular freight movement or a
-            time-sensitive delivery, we help businesses keep their operations moving.
+           Movexolog caters to companies that rely on accurate cargo handlings, timely movement, and transparency in the logistics chain from dispatching to delivery.
+
           </p>
         </section>
 
@@ -120,11 +119,10 @@ export default function Clients() {
         <section className="client-trust-section">
           <div className="trust-content">
             <span className="clients-kicker">Why Clients Choose Us</span>
-            <h2>Built Around Trust, Visibility and Long-Term Service</h2>
+            <h2>Constructed upon Foundations of Trust, Clarity and Longevity</h2>
             <p>
-              We understand that logistics is not only about moving cargo. It is about
-              protecting timelines, reducing operational pressure and giving clients
-              confidence that every shipment is being handled responsibly.
+              We know that logistics is not just about moving goods. So it is not just about timelines but also reducing operational pressure and putting client minds at ease that every shipment is being dealt with responsibly.
+
             </p>
           </div>
 
@@ -167,10 +165,11 @@ export default function Clients() {
         <section className="client-message-section">
           <div className="message-card">
             <span className="clients-kicker">Partnership Mindset</span>
-            <h2>We Treat Every Client Shipment Like a Responsibility</h2>
+            <h2>We Treat Every Client Shipment Like a Responsibility
+</h2>
             <p>
-              From first-time clients to long-term business partners, our focus stays the same:
-              clear communication, dependable planning and responsible cargo movement.
+              Our goal remains unchanged: to communicate clearly, offer dependable planning and provide a responsible flow of cargo – from first-time clients to long term business partners.
+
             </p>
           </div>
         </section>

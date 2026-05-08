@@ -22,10 +22,10 @@ const services = [
 ];
 
 const process = [
-  ["details", "Share your shipment details"],
-  ["plan", "Get a planned logistics solution"],
-  ["check", "Confirm booking and documentation"],
-  ["truck", "Track dispatch to final delivery"],
+  ["details", "Submit Your Shipping Requirements"],
+  ["plan", "Get a Tailored Logistics Strategy"],
+  ["check", "Approve Booking & Seamless Documentation"],
+  ["truck", "Monitor Every Mile Until Safe Delivery"],
 ];
 
 export default function Services() {
@@ -44,7 +44,7 @@ export default function Services() {
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Movexolog" />
         <meta name="publisher" content="Movexolog Logistics" />
-        <link rel="canonical" href="https://yourdomain.com/services" />
+        <link rel="canonical" href="https://www.movexolog.com/services" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Movexolog Logistics Services" />
@@ -52,8 +52,8 @@ export default function Services() {
           property="og:description"
           content="Reliable logistics services for road freight, inbound cargo, cross-border movement and express delivery."
         />
-        <meta property="og:url" content="https://yourdomain.com/services" />
-        <meta property="og:image" content="https://yourdomain.com/logo.png" />
+        <meta property="og:url" content="https://www.movexolog.com/services" />
+        <meta property="og:image" content="https://www.movexolog.com/logo.png" />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -63,7 +63,7 @@ export default function Services() {
             provider: {
               "@type": "Organization",
               name: "Movexolog",
-              url: "https://yourdomain.com/",
+              url: "https://www.movexolog.com/",
             },
             serviceType: services.map((item) => item.title),
             areaServed: "Worldwide",
@@ -79,10 +79,10 @@ export default function Services() {
         <section className="services-hero">
           <div className="services-hero-content">
             <span className="services-kicker">Home  <span className="sep">&gt;</span>  Our Services</span>
-            <h1>Reliable Logistics Solutions Built for Every Move</h1>
+            <h1>Reliable Logistics for a Fast-Moving World </h1>
             <p>
-              From road freight to cross-border shipments, Movexolog helps businesses move cargo with better planning,
-              clear communication and dependable delivery support.
+              From road freight to cross-border shipments, Movexolog enables businesses to move the load with advanced planning, seamless communication and reliable delivery support.
+
             </p>
           </div>
         </section>
@@ -90,11 +90,11 @@ export default function Services() {
         <section className="services-intro">
           <div>
             <span className="services-kicker">What We Offer</span>
-            <h2>End-to-End Logistics That Keep Your Business Moving</h2>
+            <h2>End-to-End Logistics That Keep Your Business Moving </h2>
           </div>
           <p>
-            Every shipment has a purpose, timeline and responsibility. Our services are built to simplify the movement
-            of goods, reduce delays and give businesses the confidence to scale with a trusted logistics partner.
+            Each shipment has an intent, schedule and accountability. Designed to facilitate the flow of goods, eliminate downtime, and provide businesses with the assurance they need to scale in a safe manner with a logistics partner they can rely on.
+
           </p>
         </section>
 
@@ -118,8 +118,8 @@ export default function Services() {
             <span className="services-kicker">How It Works</span>
             <h2>Simple Process. Strong Execution.</h2>
             <p>
-              We keep the process practical and transparent so your shipment can move from planning to delivery with
-              fewer complications.
+              By serving as an intermediary, we keep the process practical and transparent so your shipment can experience less complications from planning to delivery.
+
             </p>
           </div>
 
@@ -139,11 +139,9 @@ export default function Services() {
         <section className="service-benefits">
           <div className="benefit-card">
             <span className="services-kicker">Why Movexolog</span>
-            <h2>Built on Speed, Safety and Service Quality</h2>
+            <h2>Powered by Speed. Trusted for Safety. </h2>
             <p>
-              Our logistics support is designed for businesses that need consistent performance, safe cargo movement
-              and a team that responds when it matters. We combine practical industry experience with a dependable
-              partner network to support shipments across different routes and requirements.
+              Our logistics support are premium for those businesses for whom - consistent performance, safe movement of cargo and an able team responding at the crucial moment matters. We bring both practical experience in the field as well as a reliable network of partners to help ensure that shipments can go out on other routes and with different specifications.
             </p>
           </div>
 

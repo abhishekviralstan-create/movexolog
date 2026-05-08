@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/navbar";
 import "../css/home.css";
-import truckVideo from '../assets/1sthero.mp4';
+import truckVideo from "../assets/1sthero.mp4";
 import { FaTruck } from "react-icons/fa";
+
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzLDVj2aSOavD85mBB9L2MQAbNoA69t1GiZLgT-G3AUbqOlp4VBoMuCM1EISARgHm1/exec";
 
 const whatWeProvide = [
   {
@@ -79,33 +81,100 @@ const stats = [
 ];
 
 export default function Home() {
+  const [showPopup, setShowPopup] = useState(false);
   const [testimonialPage, setTestimonialPage] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [quoteForm, setQuoteForm] = useState({
+    fullName: "",
+    company: "",
+    email: "",
+    phone: "",
+    serviceType: "Road Freight",
+    route: "",
+    details: "",
+  });
+
+  const handleQuoteChange = (e) => {
+    const { name, value } = e.target;
+
+    setQuoteForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleQuoteSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YAHAN_APNA")) {
+      alert("Please add your Google Apps Script Web App URL first.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const formData = {
+      fullName: quoteForm.fullName,
+      company: quoteForm.company,
+      email: quoteForm.email,
+      phone: quoteForm.phone,
+      serviceType: quoteForm.serviceType,
+      route: quoteForm.route,
+      details: quoteForm.details,
+      date: new Date().toLocaleString(),
+      source: "Movexolog Home Quote Form",
+    };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+   setShowPopup(true);
+
+      setQuoteForm({
+        fullName: "",
+        company: "",
+        email: "",
+        phone: "",
+        serviceType: "Road Freight",
+        route: "",
+        details: "",
+      });
+    } catch (error) {
+      console.error("Quote form submit error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTestimonialPage((prev) => {
         if (window.innerWidth <= 600) {
-          // mobile → 1 by 1
           return (prev + 1) % testimonials.length;
-        } else {
-          // desktop → 3 cards logic
-          return prev + 3 >= testimonials.length ? 0 : prev + 1;
         }
+
+        return prev + 3 >= testimonials.length ? 0 : prev + 1;
       });
     }, 10000);
 
     return () => clearInterval(timer);
   }, []);
 
-  const testimonialSlides = testimonials.map((_, index) => [
-    testimonials[index % testimonials.length],
-    testimonials[(index + 1) % testimonials.length],
-    testimonials[(index + 2) % testimonials.length],
-  ]);
-
   return (
     <div className="movexolog-page">
       <Helmet>
-        <title>Movexolog Logistics | Dispatch to Delivery Global Transport Solutions</title>
+        <title>
+          Movexolog Logistics | Dispatch to Delivery Global Transport Solutions
+        </title>
 
         <meta
           name="description"
@@ -121,18 +190,21 @@ export default function Home() {
         <meta name="publisher" content="Movexolog Logistics" />
         <meta name="robots" content="index, follow" />
 
-        <link rel="canonical" href="https://yourdomain.com/" />
+        <link rel="canonical" href="https://www.movexolog.com/" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Movexolog Logistics | Dispatch to Delivery" />
+        <meta
+          property="og:title"
+          content="Movexolog Logistics | Dispatch to Delivery"
+        />
         <meta
           property="og:description"
           content="Efficient logistics and transportation solutions with real-time tracking, global delivery and trusted supply chain management."
         />
-        <meta property="og:url" content="https://yourdomain.com/" />
-        <meta property="og:image" content="https://yourdomain.com/preview.jpg" />
+        <meta property="og:url" content="https://www.movexolog.com/" />
+        <meta property="og:image" content="https://www.movexolog.com/preview.jpg" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Movexolog Logistics" />
@@ -140,7 +212,7 @@ export default function Home() {
           name="twitter:description"
           content="Reliable logistics, freight and shipment services worldwide."
         />
-        <meta name="twitter:image" content="https://yourdomain.com/preview.jpg" />
+        <meta name="twitter:image" content="https://www.movexolog.com/preview.jpg" />
 
         <meta name="geo.region" content="IN" />
         <meta name="geo.placename" content="India" />
@@ -151,8 +223,8 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "Organization",
             name: "Movexolog",
-            url: "https://yourdomain.com/",
-            logo: "https://yourdomain.com/logo.png",
+            url: "https://www.movexolog.com/",
+            logo: "https://www.movexolog.com/logo.png",
             sameAs: [
               "https://facebook.com/",
               "https://instagram.com/",
@@ -173,8 +245,8 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "LogisticsBusiness",
             name: "Movexolog Logistics",
-            image: "https://yourdomain.com/logo.png",
-            url: "https://yourdomain.com/",
+            image: "https://www.movexolog.com/logo.png",
+            url: "https://www.movexolog.com/",
             telephone: "+91-0000000000",
             address: {
               "@type": "PostalAddress",
@@ -205,7 +277,8 @@ export default function Home() {
             <h1>Dispatch to Delivery MOVEXOLOG</h1>
 
             <p>
-              Efficient, reliable and real-world logistics solutions built on over ten years of industry expertise.
+              Efficient, reliable and real-world logistics solutions built on
+              over ten years of industry expertise.
             </p>
 
             <div className="hero-buttons">
@@ -275,14 +348,23 @@ export default function Home() {
           <div className="about-row">
             <div className="about-col-8">
               <div className="section-label">ABOUT US</div>
-              <h2 className="section-title">Trusted by Every Mile We Deliver</h2>
+              <h2 className="section-title">
+                Trusted by Every Mile We Deliver
+              </h2>
 
               <p>
-                We are an industry leader in global logistics, with a network that drives efficiency across the supply chain through stable positions and innovative partnerships with manufacturers.
+                We are an industry leader in global logistics, with a network
+                that drives efficiency across the supply chain through stable
+                positions and innovative partnerships with manufacturers.
               </p>
 
               <p>
-                We take a smart, real-world approach to providing an experience that is both reliable and up-to-date with your needs delivering true value while establishing some of the highest standards in service, performance and operational excellence. Our commitment is with ethical operations and a strong emphasis on successful results for our clients.
+                We take a smart, real-world approach to providing an experience
+                that is both reliable and up-to-date with your needs delivering
+                true value while establishing some of the highest standards in
+                service, performance and operational excellence. Our commitment
+                is with ethical operations and a strong emphasis on successful
+                results for our clients.
               </p>
             </div>
 
@@ -348,8 +430,6 @@ export default function Home() {
           </div>
         </section>
 
-
-
         <section className="stats-section">
           <SectionHeader
             label="Company Statistics"
@@ -360,7 +440,7 @@ export default function Home() {
 
           <div className="company-stats-grid">
             {stats.map(([icon, num, label]) => (
-              <div className="company-stat-card" key={num}>
+              <div className="company-stat-card" key={`${num}-${label}`}>
                 <div className="stat-icon">
                   <Icon type={icon} />
                 </div>
@@ -388,39 +468,96 @@ export default function Home() {
             centered
           />
 
-          <form className="quote-form">
-            <FormInput label="Full Name" placeholder="Your full name" />
-            <FormInput label="Company" placeholder="Company name" />
+          <form className="quote-form" onSubmit={handleQuoteSubmit}>
+            <FormInput
+              label="Full Name"
+              name="fullName"
+              value={quoteForm.fullName}
+              onChange={handleQuoteChange}
+              placeholder="Your full name"
+              required
+            />
+
+            <FormInput
+              label="Company"
+              name="company"
+              value={quoteForm.company}
+              onChange={handleQuoteChange}
+              placeholder="Company name"
+            />
+
             <FormInput
               label="Email Address"
               type="email"
+              name="email"
+              value={quoteForm.email}
+              onChange={handleQuoteChange}
               placeholder="your@email.com"
+              required
             />
-            <FormInput label="Phone Number" placeholder="+1 000 000 0000" />
+
+            <FormInput
+              label="Phone Number"
+              name="phone"
+              value={quoteForm.phone}
+              onChange={handleQuoteChange}
+              placeholder="+1 000 000 0000"
+              required
+            />
 
             <div className="form-group">
               <label>Service Type</label>
-              <select>
-                <option>Road Freight</option>
-                <option>Cross Border Shipments</option>
-                <option>Inbound Shipments</option>
+              <select
+                name="serviceType"
+                value={quoteForm.serviceType}
+                onChange={handleQuoteChange}
+                required
+              >
+                <option value="Road Freight">Road Freight</option>
+                <option value="Cross Border Shipments">
+                  Cross Border Shipments
+                </option>
+                <option value="Inbound Shipments">Inbound Shipments</option>
               </select>
             </div>
 
             <FormInput
               label="Route / Destination"
+              name="route"
+              value={quoteForm.route}
+              onChange={handleQuoteChange}
               placeholder="Origin → Destination"
             />
 
             <div className="form-group full">
               <label>Additional Details</label>
-              <textarea placeholder="Cargo type, weight, special requirements..." />
+              <textarea
+                name="details"
+                value={quoteForm.details}
+                onChange={handleQuoteChange}
+                placeholder="Cargo type, weight, special requirements..."
+              />
             </div>
 
-            <button className="btn-primary" type="submit">
-              Send Quote Request
+            <button className="btn-primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Send Quote Request"}
             </button>
           </form>
+          {showPopup && (
+  <div className="success-popup-overlay">
+    <div className="success-popup">
+      <h3>Form Submitted Successfully!</h3>
+
+      <p>
+        Thank you for contacting Movexolog. Our team will contact you soon.
+      </p>
+
+      <button onClick={() => setShowPopup(false)}>
+        Close
+      </button>
+    </div>
+  </div>
+)}
         </section>
 
         <section className="white-section">
@@ -436,8 +573,8 @@ export default function Home() {
               {testimonials.map((item, index) => {
                 const isActive =
                   window.innerWidth <= 600
-                    ? index === testimonialPage // mobile → 1
-                    : index >= testimonialPage && index < testimonialPage + 3; // desktop → 3
+                    ? index === testimonialPage
+                    : index >= testimonialPage && index < testimonialPage + 3;
 
                 return (
                   <div
@@ -476,23 +613,22 @@ export default function Home() {
           </div>
         </section>
 
-   <section className="home-cta">
-  <div>
-    <small>Our Newsletters</small>
-    <h2>Don’t Miss Our Offer Tips & Much More</h2>
-  </div>
+        <section className="home-cta">
+          <div>
+            <small>Our Newsletters</small>
+            <h2>Don’t Miss Our Offer Tips & Much More</h2>
+          </div>
 
-  <form>
-    <a href="/contact-us" className="skill-btn2">
-      Get Free Quote
-    </a>
-  </form>
+          <form>
+            <a href="/contact-us" className="skill-btn2">
+              Get Free Quote
+            </a>
+          </form>
 
-  {/* 🚚 Truck Icon */}
-  <div className="cta-truck">
-    <FaTruck />
-  </div>
-</section>
+          <div className="cta-truck">
+            <FaTruck />
+          </div>
+        </section>
       </main>
     </div>
   );
