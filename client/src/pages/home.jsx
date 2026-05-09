@@ -4,29 +4,67 @@ import Header from "../components/navbar";
 import "../css/home.css";
 import truckVideo from "../assets/1sthero.mp4";
 import { FaTruck } from "react-icons/fa";
-
+import inboundImg from "../assets/2.png";
+import roadfreight from "../assets/1.png";
+import crossBorder from "../assets/3.png";
+import supportBg from "../assets/support.png";
+import service1 from "../assets/Road-Freight.png";
+import service2 from "../assets/cross-border.png";
+import service3 from "../assets/inbound-shipment.png";
+import ctaBg from "../assets/cta-bg.png";
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzLDVj2aSOavD85mBB9L2MQAbNoA69t1GiZLgT-G3AUbqOlp4VBoMuCM1EISARgHm1/exec";
 
 const whatWeProvide = [
   {
     iconType: "box",
     title: "Inbound Shipments",
-    desc: "Timely arrivals at your location, accurate handling and smooth integration into the supply chain operations without delays or disruptions by efficient inbound logistics.",
+    image: inboundImg,
+    desc: "Timely arrivals at your location...",
   },
+
   {
     iconType: "truck",
     title: "Road Freight",
-    desc: "Dependable road freight services with efficient, flexible and repeatable performance on every mile to assure your cargo is handled safely and delivered as scheduled.",
+    image: roadfreight,
+    desc: "Dependable road freight services...",
   },
+
   {
     iconType: "globe",
     title: "Cross Border Shipments",
-    desc: "Intelligent cross border logistics designed for clearances that harmonise, ensure compliance and facilitate the continuous movement of international freight whilst providing visibility over every step along the way with total control and reliable transit times.",
+    image: crossBorder,
+    desc: "Intelligent cross border logistics...",
   },
 ];
 
-const services = ["Road Freight", "Cross Border Shipments", "Inbound Shipments"];
+const services = [
+  {
+    title: "Road Freight",
+    image: service1,
 
+    desc: "Fast and secure road freight solutions designed for businesses that need dependable transportation across every route.",
+
+    link: "/services",
+  },
+
+  {
+    title: "Cross Border Shipments",
+    image: service2,
+
+    desc: "Smooth international logistics with customs support, real-time tracking and reliable border clearance operations.",
+
+    link: "/services",
+  },
+
+  {
+    title: "Inbound Shipments",
+    image: service3,
+
+    desc: "Efficient inbound shipment handling with streamlined coordination and warehouse integration support.",
+
+    link: "/services",
+  },
+];
 const testimonials = [
   {
     text: "Aside from being great professionals, we have been collaborating with MOVEXOLOG for some time already and is making life easy! Their deliveries are on time, and their team answers when needed,” he recounts.",
@@ -136,7 +174,7 @@ export default function Home() {
         body: JSON.stringify(formData),
       });
 
-   setShowPopup(true);
+      setShowPopup(true);
 
       setQuoteForm({
         fullName: "",
@@ -328,7 +366,19 @@ export default function Home() {
 
           <div className="services-grid">
             {whatWeProvide.map((item, index) => (
-              <div className="service-card" key={item.title}>
+              <div
+                className="service-card"
+                key={item.title}
+                style={{
+                  backgroundImage: `
+          linear-gradient(
+            rgba(0,0,0,0.72),
+            rgba(0,0,0,0.84)
+          ),
+          url(${item.image})
+        `,
+                }}
+              >
                 <div className="service-icon">
                   <Icon type={item.iconType} />
                 </div>
@@ -338,6 +388,7 @@ export default function Home() {
                 </div>
 
                 <h3>{item.title}</h3>
+
                 <p>{item.desc}</p>
               </div>
             ))}
@@ -386,11 +437,26 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="support-banner">
+        <section
+          className="support-banner"
+          style={{
+            backgroundImage: `
+      linear-gradient(
+        rgba(0,0,0,0.78),
+        rgba(0,0,0,0.82)
+      ),
+      url(${supportBg})
+    `,
+          }}
+        >
           <div>
             <h3>Support That Never Sleeps</h3>
+
             <h2>Need Immediate Support or Assistance?</h2>
-            <p>Our expert team is available 24/7 to help you, anytime.</p>
+
+            <p>
+              Our expert team is available 24/7 to help you, anytime.
+            </p>
           </div>
         </section>
 
@@ -404,9 +470,28 @@ export default function Home() {
 
           <div className="simple-services">
             {services.map((item) => (
-              <div className="simple-service-card" key={item}>
-                <Icon type="truck" />
-                <h3>{item}</h3>
+              <div
+                className="simple-service-card"
+                key={item.title}
+                style={{
+                  backgroundImage: `
+        linear-gradient(
+          rgba(0,0,0,0.72),
+          rgba(0,0,0,0.86)
+        ),
+        url(${item.image})
+      `,
+                }}
+              >
+                <div className="service-content">
+                  <h3>{item.title}</h3>
+
+                  <p>{item.desc}</p>
+
+                  <a href={item.link} className="service-link">
+                    Learn More
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -430,35 +515,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="stats-section">
-          <SectionHeader
-            label="Company Statistics"
-            title="We Are Professional Logistics & Transportations Agency"
-            sub=""
-            centered
-          />
 
-          <div className="company-stats-grid">
-            {stats.map(([icon, num, label]) => (
-              <div className="company-stat-card" key={`${num}-${label}`}>
-                <div className="stat-icon">
-                  <Icon type={icon} />
-                </div>
-
-                <h3>
-                  <Counter end={num} />
-                  <sup>+</sup>
-                </h3>
-
-                <p>{label}</p>
-
-                <div className="stat-line">
-                  <span />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         <section id="quote" className="quote-section">
           <SectionHeader
@@ -544,20 +601,20 @@ export default function Home() {
             </button>
           </form>
           {showPopup && (
-  <div className="success-popup-overlay">
-    <div className="success-popup">
-      <h3>Form Submitted Successfully!</h3>
+            <div className="success-popup-overlay">
+              <div className="success-popup">
+                <h3>Form Submitted Successfully!</h3>
 
-      <p>
-        Thank you for contacting Movexolog. Our team will contact you soon.
-      </p>
+                <p>
+                  Thank you for contacting Movexolog. Our team will contact you soon.
+                </p>
 
-      <button onClick={() => setShowPopup(false)}>
-        Close
-      </button>
-    </div>
-  </div>
-)}
+                <button onClick={() => setShowPopup(false)}>
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
         </section>
 
         <section className="white-section">
@@ -612,10 +669,51 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section className="stats-section">
+          <SectionHeader
+            label="Company Statistics"
+            title="We Are Professional Logistics & Transportations Agency"
+            sub=""
+            centered
+          />
 
-        <section className="home-cta">
+          <div className="company-stats-grid">
+            {stats.map(([icon, num, label]) => (
+              <div className="company-stat-card" key={`${num}-${label}`}>
+                <div className="stat-icon">
+                  <Icon type={icon} />
+                </div>
+
+                <h3>
+                  <Counter end={num} />
+                  <sup>+</sup>
+                </h3>
+
+                <p>{label}</p>
+
+                <div className="stat-line">
+                  <span />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          className="home-cta"
+          style={{
+            backgroundImage: `
+      linear-gradient(
+        rgba(0,0,0,0.72),
+        rgba(0,0,0,0.82)
+      ),
+      url(${ctaBg})
+    `,
+          }}
+        >
           <div>
             <small>Our Newsletters</small>
+
             <h2>Don’t Miss Our Offer Tips & Much More</h2>
           </div>
 

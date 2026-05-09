@@ -157,28 +157,23 @@ setShowPopup(true);
               road freight to cross-border shipment support.
             </p>
 
-            <div className="contact-cards">
-              <div className="contact-card">
-                <Icon name="phone" />
-                <h3>Call Support</h3>
-                <p>Logistics details on your shipment are available 24/7.</p>
-              </div>
+           <div className="contact-cards two-cards">
+  <div className="contact-card">
+    <Icon name="map" />
+    <h3>Office Address</h3>
+    <p>30 N Gould St Ste R Sheridan, WY 82801</p>
+  </div>
 
-              <div className="contact-card">
-                <Icon name="mail" />
-                <h3>Email Us</h3>
-                <p>info@movexolog.com</p>
-              </div>
-
-              <div className="contact-card">
-                <Icon name="map" />
-                <h3>Service Area</h3>
-                <p>
-                  They support the movement of freight and logistics around the
-                  world.
-                </p>
-              </div>
-            </div>
+  <div className="contact-card">
+    <Icon name="mail" />
+    <h3>Email Us</h3>
+    <p>
+      <a href="mailto:info@movexolog.com">
+        info@movexolog.com
+      </a>
+    </p>
+  </div>
+</div>
           </div>
 
           <form className="contact-form" onSubmit={handleContactSubmit}>
@@ -279,7 +274,7 @@ setShowPopup(true);
             <span>Need urgent shipment support?</span>
             <h2>Our team is ready to help you plan the next move.</h2>
           </div>
-          <a href="/tracking">Track Shipment</a>
+          <a href="/contact-us">Contact Now</a>
         </section>
       </main>
     </div>

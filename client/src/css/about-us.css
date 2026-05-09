@@ -16,12 +16,10 @@
   min-height: 90vh;
   align-items: center;
   padding: 120px 6% 80px;
-
   background:
     linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)),
     url("../assets/herobg.png") center/cover no-repeat;
 }
-
 
 .about-hero-content {
   max-width: 850px;
@@ -48,8 +46,6 @@
 
 .about-hero p,
 .about-extra p,
-.about-card p,
-.standard-card p,
 .promise-card p,
 .impact-box p {
   line-height: 1.8;
@@ -68,40 +64,97 @@
   padding: 90px 6%;
 }
 
-.about-grid {
+.about-grid,
+.standards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
-.about-card {
-  background: #f5f6f8;
+/* IMAGE CARDS */
+
+.about-card,
+.standard-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 370px;
   padding: 36px;
-  border-radius: 14px;
-  border-top: 3px solid #e00000;
-  min-height: 330px;
+  border-radius: 18px;
+
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  transition: 0.45s ease;
+}
+
+.about-card::before,
+.standard-card::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+ background:
+  radial-gradient(
+    circle,
+    rgba(255, 20, 20, 0.28),
+    rgba(120, 0, 0, 0.18),
+    transparent 72%
+  );
+  top: -120px;
+  right: -120px;
+  z-index: 0;
+  transition: 0.5s ease;
+}
+
+.about-card > *,
+.standard-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.about-card:hover,
+.standard-card:hover {
+  transform: translateY(-10px);
+  box-shadow:
+  0 30px 70px rgba(180, 0, 0, 0.28),
+  0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+.about-card:hover::before,
+.standard-card:hover::before {
+  transform: scale(1.2);
 }
 
 .about-card span {
-  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 3.5rem;
   font-weight: 900;
-  color: rgba(224, 0, 0, 0.18);
+  margin-bottom: 12px;
 }
 
-.about-card h2 {
+.about-card h2,
+.standard-card h3 {
+  color: #fff;
   font-size: 1.5rem;
   margin: 12px 0 14px;
 }
 
-.red-card {
-  background: linear-gradient(135deg, #e00000, #990000);
-  color: #fff;
+.about-card p,
+.standard-card p {
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.8;
+  font-size: 0.98rem;
 }
 
-.red-card span,
-.red-card p {
-  color: rgba(255, 255, 255, 0.85);
-}
+/* NORMAL SECTIONS */
 
 .light {
   background: #f5f6f8;
@@ -170,38 +223,34 @@
   margin: 0 auto 55px;
 }
 
-.standards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
+/* STANDARD CARDS */
 
 .standard-card {
-  background: #f5f6f8;
-  padding: 35px;
-  border-radius: 14px;
-  border-bottom: 4px solid #e00000;
   text-align: center;
+  justify-content: center;
+  border-bottom: 4px solid #e00000;
 }
 
 .standard-card .icon {
-  width: 64px;
-  height: 64px;
-  background: rgba(224, 0, 0, 0.08);
-  color: #e00000;
+  width: 75px;
+  height: 75px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 22px;
   border-radius: 50%;
   font-size: 2rem;
   font-weight: 900;
 }
 
 .standard-card h3 {
-  margin: 0 0 12px;
   font-size: 1.25rem;
 }
+
+/* RESPONSIVE */
 
 @media (max-width: 991px) {
   .about-hero {
@@ -237,7 +286,6 @@
 }
 
 @media (max-width: 600px) {
-
   .about-hero h1,
   .section-head h2,
   .about-extra h2 {

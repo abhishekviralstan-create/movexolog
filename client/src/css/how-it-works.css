@@ -16,7 +16,6 @@
   min-height: 90vh;
   align-items: center;
   padding: 120px 6% 80px;
-
   background:
     linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)),
     url("../assets/herobg.png") center/cover no-repeat;
@@ -54,37 +53,6 @@
   line-height: 1.8;
 }
 
-.how-actions {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 34px;
-}
-
-.primary-btn,
-.outline-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding: 14px 30px;
-  border-radius: 6px;
-  font-weight: 900;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-size: 0.82rem;
-}
-
-.primary-btn {
-  background: #e00000;
-  color: #fff;
-}
-
-.outline-btn {
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  color: #fff;
-}
-
 .how-intro,
 .steps-section,
 .timeline-section,
@@ -104,7 +72,6 @@
 
 .how-intro p,
 .section-head p,
-.step-card p,
 .benefit-left p,
 .quality-card p {
   color: #666;
@@ -122,31 +89,71 @@
   gap: 25px;
 }
 
+/* WORKFLOW IMAGE CARDS */
+
 .step-card {
   position: relative;
-  background: #fff;
-  padding: 38px;
-  border-radius: 16px;
-  border-top: 3px solid #e00000;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  transition: 0.25s ease;
+  min-height: 390px;
+  padding: 36px;
+  border-radius: 20px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  transition: 0.45s ease;
+}
+
+.step-card::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 20, 20, 0.26),
+      rgba(120, 0, 0, 0.16),
+      transparent 72%
+    );
+  top: -120px;
+  right: -120px;
+  z-index: 0;
+  transition: 0.5s ease;
+}
+
+.step-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .step-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
+  box-shadow:
+    0 30px 70px rgba(180, 0, 0, 0.28),
+    0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+.step-card:hover::before {
+  transform: scale(1.2);
 }
 
 .step-icon {
   width: 68px;
   height: 68px;
-  background: rgba(224, 0, 0, 0.08);
-  color: #e00000;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff2a2a;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 14px;
   margin-bottom: 22px;
+  backdrop-filter: blur(10px);
 }
 
 .how-icon {
@@ -161,13 +168,21 @@
   top: 22px;
   font-size: 4rem;
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.05);
+  color: rgba(255, 255, 255, 0.18);
   line-height: 1;
 }
 
 .step-card h3 {
-  font-size: 1.28rem;
+  color: #fff;
+  font-size: 1.35rem;
   margin: 0 0 12px;
+}
+
+.step-card p {
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 .timeline-section {
@@ -290,16 +305,46 @@
   border-left: 4px solid #e00000;
 }
 
+/* CTA IMAGE BG */
+
 .how-cta {
-  background: #e00000;
+  position: relative;
+  overflow: hidden;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 25px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  isolation: isolate;
+}
+
+.how-cta::before {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  right: -130px;
+  top: -150px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 20, 20, 0.28),
+      rgba(120, 0, 0, 0.18),
+      transparent 72%
+    );
+  z-index: 0;
+}
+
+.how-cta > * {
+  position: relative;
+  z-index: 2;
 }
 
 .how-cta span {
+  color: #ffb6b6;
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 2px;
@@ -309,10 +354,11 @@
 .how-cta h2 {
   font-size: clamp(1.7rem, 4vw, 3rem);
   margin: 8px 0 0;
+  color: #fff;
 }
 
 .how-cta a {
-  background: #111;
+  background: #e00000;
   color: #fff;
   text-decoration: none;
   padding: 16px 30px;
@@ -320,6 +366,13 @@
   font-weight: 900;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: 0.3s ease;
+}
+
+.how-cta a:hover {
+  background: #fff;
+  color: #111;
+  transform: translateY(-3px);
 }
 
 @media (max-width: 991px) {
@@ -355,10 +408,6 @@
     text-align: center;
   }
 
-  .how-actions {
-    justify-content: center;
-  }
-
   .step-icon {
     margin-left: auto;
     margin-right: auto;
@@ -375,7 +424,6 @@
 }
 
 @media (max-width: 600px) {
-
   .how-hero h1,
   .how-intro h2,
   .section-head h2,
@@ -387,19 +435,6 @@
   .step-card,
   .quality-card {
     padding: 28px 22px;
-  }
-
-  .how-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .primary-btn,
-  .outline-btn,
-  .how-cta a {
-    width: 100%;
-    max-width: 280px;
-    text-align: center;
   }
 
   .timeline-wrap::before {
@@ -419,5 +454,11 @@
 
   .benefit-item {
     flex-direction: column;
+  }
+
+  .how-cta a {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
   }
 }

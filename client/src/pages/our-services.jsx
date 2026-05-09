@@ -1,31 +1,71 @@
 import { Helmet } from "react-helmet-async";
 import Header from "../components/navbar";
 import "../css/our-services.css";
+import service1 from "../assets/1.png";
+import service2 from "../assets/2.png";
+import service3 from "../assets/3.png";
+
+import process1 from "../assets/process1.png";
+import process2 from "../assets/process1.png";
+import process3 from "../assets/process1.png";
+import process4 from "../assets/process1.png";
 
 const services = [
-   {
+  {
     icon: "box",
+
     title: "Inbound Shipments",
+
+    image: service1,
+
     desc: "Smooth inbound logistics designed to keep your warehouse, supply chain and business operations running without unnecessary delays.",
   },
+
   {
     icon: "road",
+
     title: "Road Freight",
+
+    image: service2,
+
     desc: "Reliable road transport for regional and long-distance cargo movement with planned routes, safe handling and on-time delivery support.",
   },
- 
+
   {
     icon: "globe",
+
     title: "Cross Border Shipments",
+
+    image: service3,
+
     desc: "Smart international freight movement with documentation support, customs-focused coordination and clear shipment visibility.",
-  }
+  },
 ];
 
 const process = [
-  ["details", "Submit Your Shipping Requirements"],
-  ["plan", "Get a Tailored Logistics Strategy"],
-  ["check", "Approve Booking & Seamless Documentation"],
-  ["truck", "Monitor Every Mile Until Safe Delivery"],
+  {
+    icon: "details",
+    title: "Submit Your Requirements",
+    image: process1,
+  },
+
+  {
+    icon: "plan",
+    title: "Get a Tailored Logistics Strategy",
+    image: process2,
+  },
+
+  {
+    icon: "check",
+    title: "Approve Booking & Documentation",
+    image: process3,
+  },
+
+  {
+    icon: "truck",
+    title: "Monitor Every Mile Until Safe Delivery",
+    image: process4,
+  },
 ];
 
 export default function Services() {
@@ -35,7 +75,7 @@ export default function Services() {
         <title>Movexolog Services | Road Freight, Inbound & Cross Border Logistics</title>
         <meta
           name="description"
-          content="Explore Movexolog logistics services including road freight, inbound shipments, cross-border transport, express delivery, real-time tracking and secure cargo handling."
+          content="Explore Movexolog logistics services including road freight, inbound shipments, cross-border transport tracking and secure cargo handling."
         />
         <meta
           name="keywords"
@@ -97,16 +137,32 @@ export default function Services() {
 
           </p>
         </section>
-
         <section id="services-list" className="services-list">
           <div className="services-grid">
             {services.map((service, index) => (
-              <div className="service-box" key={service.title}>
+              <div
+                className="service-box"
+                key={service.title}
+                style={{
+                  backgroundImage: `
+            linear-gradient(
+              rgba(0,0,0,0.72),
+              rgba(0,0,0,0.86)
+            ),
+            url(${service.image})
+          `,
+                }}
+              >
                 <div className="service-icon">
                   <Icon name={service.icon} />
                 </div>
-                <span className="service-count">{String(index + 1).padStart(2, "0")}</span>
+
+                <span className="service-count">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
                 <h3>{service.title}</h3>
+
                 <p>{service.desc}</p>
               </div>
             ))}
@@ -124,13 +180,27 @@ export default function Services() {
           </div>
 
           <div className="process-grid">
-            {process.map(([icon, item], index) => (
-              <div className="process-card" key={item}>
+            {process.map((item, index) => (
+              <div
+                className="process-card"
+                key={item.title}
+                style={{
+                  backgroundImage: `
+          linear-gradient(
+            rgba(0,0,0,0.72),
+            rgba(0,0,0,0.86)
+          ),
+          url(${item.image})
+        `,
+                }}
+              >
                 <div className="process-icon">
-                  <Icon name={icon} />
+                  <Icon name={item.icon} />
                 </div>
+
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{item}</h3>
+
+                <h3>{item.title}</h3>
               </div>
             ))}
           </div>
@@ -158,7 +228,7 @@ export default function Services() {
             <span>Need a logistics partner?</span>
             <h2>Book your shipment with confidence.</h2>
           </div>
-          <a href="/tracking">Get Free Quote Now</a>
+          <a href="/contact-us">Get Free Quote Now</a>
         </section>
       </main>
     </div>

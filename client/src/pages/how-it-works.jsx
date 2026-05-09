@@ -2,36 +2,51 @@ import { Helmet } from "react-helmet-async";
 import Header from "../components/navbar";
 import "../css/how-it-works.css";
 
+import process1 from "../assets/details.avif";
+import process2 from "../assets/route.avif";
+import process3 from "../assets/confirmation.jpg";
+import process4 from "../assets/dispatch.jpg";
+import process5 from "../assets/cargo.jpg";
+import process6 from "../assets/delivered.jpg";
+
+import ctaBg from "../assets/cargo.jpg";
+
 const steps = [
   {
     icon: "file",
     title: "Share Shipment Details",
-    desc: "To continue helping you understand your movement, tell us the pickup location, delivery destination, cargo type, size of shipment and how soon you need it done.",
+    image: process1,
+    desc: "Share pickup location, delivery destination, cargo type, shipment size and delivery timeline so our team can understand your logistics requirement clearly.",
   },
   {
     icon: "map",
     title: "Route & Plan Creation",
-    desc: "Many of those needs will be translated into ground-hitting aspects like route selection, service type and levels, documentation requirements and delivery expectations by our logistics team.",
+    image: process2,
+    desc: "Our logistics team prepares the best route, service type, documentation needs and delivery plan based on your shipment requirement.",
   },
   {
     icon: "check",
     title: "Booking Confirmation",
-    desc: "Approved, we will ship according to the plan and coordinate required documents for cargo movement process.",
+    image: process3,
+    desc: "Once the plan is approved, we confirm your booking and coordinate the required documents for smooth cargo movement.",
   },
   {
     icon: "truck",
     title: "Dispatch & Tracking",
-    desc: "Your orders and shipment are sent with clear updates, route visibility and tracking support from pickup to final destination.",
+    image: process4,
+    desc: "Your shipment is dispatched with clear updates, route visibility and tracking support from pickup to final destination.",
   },
   {
     icon: "shield",
     title: "Safe Cargo Handling",
-    desc: "We promote careful treatment, strong safety and transport as well as controlled co-ordination in movement based on minimal risk.",
+    image: process5,
+    desc: "We focus on careful handling, safety checks and controlled coordination to reduce risk during shipment movement.",
   },
   {
     icon: "flag",
     title: "Final Delivery",
-    desc: "It is shipped with correct confirmations, proper communication and required follow up support.",
+    image: process6,
+    desc: "The shipment is delivered with proper confirmation, clear communication and required follow-up support.",
   },
 ];
 
@@ -47,25 +62,31 @@ export default function HowItWorks() {
     <div className="how-page">
       <Helmet>
         <title>How Movexolog Works | Simple Logistics & Shipment Process</title>
+
         <meta
           name="description"
           content="Understand how Movexolog works from shipment details and route planning to dispatch, tracking, safe cargo handling and final delivery."
         />
+
         <meta
           name="keywords"
           content="how logistics works, Movexolog process, shipment booking process, freight tracking, logistics planning, cargo delivery process, road freight workflow"
         />
+
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Movexolog" />
         <meta name="publisher" content="Movexolog Logistics" />
+
         <link rel="canonical" href="https://www.movexolog.com/how-it-works" />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="How Movexolog Works" />
+
         <meta
           property="og:description"
           content="A clear logistics process built around planning, booking, dispatch, tracking and reliable delivery."
         />
+
         <meta property="og:url" content="https://www.movexolog.com/how-it-works" />
         <meta property="og:image" content="https://www.movexolog.com/logo.png" />
 
@@ -97,11 +118,16 @@ export default function HowItWorks() {
       <main>
         <section className="how-hero">
           <div className="how-hero-content">
-            <span className="how-kicker">Home  <span className="sep">&gt;</span>How We Work</span>
-            <h1>Delivering Trust, Mile After Mile. </h1>
-            <p>
-              From the first request until delivery, Movexolog keeps shipment movement clear and organized. We have established a workflow that mitigates confusion, enables visibility and moves your cargo with confidence.
+            <span className="how-kicker">
+              Home <span className="sep">&gt;</span> How We Work
+            </span>
 
+            <h1>Delivering Trust, Mile After Mile.</h1>
+
+            <p>
+              From the first request until delivery, Movexolog keeps shipment
+              movement clear and organized. Our workflow reduces confusion,
+              improves visibility and moves your cargo with confidence.
             </p>
           </div>
         </section>
@@ -109,23 +135,43 @@ export default function HowItWorks() {
         <section className="how-intro">
           <div>
             <span className="how-kicker">Our Workflow</span>
+
             <h2>From Request to Delivery, Handled with Precision</h2>
           </div>
-          <p>
-            Every single shipment requires planning, coordination and accountability. Our approach is systematic to enable the businesses to move cargo with enhanced visibility, timely alerts and reliable support.
 
+          <p>
+            Every shipment requires planning, coordination and accountability.
+            Our process helps businesses move cargo with better visibility,
+            timely updates and reliable support.
           </p>
         </section>
 
         <section id="steps" className="steps-section">
           <div className="steps-grid">
             {steps.map((step, index) => (
-              <div className="step-card" key={step.title}>
+              <div
+                className="step-card"
+                key={step.title}
+                style={{
+                  backgroundImage: `
+                    linear-gradient(
+                      rgba(20,0,0,0.72),
+                      rgba(0,0,0,0.86)
+                    ),
+                    url(${step.image})
+                  `,
+                }}
+              >
                 <div className="step-icon">
                   <Icon name={step.icon} />
                 </div>
-                <span className="step-count">{String(index + 1).padStart(2, "0")}</span>
+
+                <span className="step-count">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
                 <h3>{step.title}</h3>
+
                 <p>{step.desc}</p>
               </div>
             ))}
@@ -135,9 +181,12 @@ export default function HowItWorks() {
         <section className="timeline-section">
           <div className="section-head">
             <span className="how-kicker">Process Timeline</span>
+
             <h2>Smarter Movement. Stronger Control.</h2>
+
             <p>
-              Our timeline helps you understand what happens after you submit a shipment request.
+              Our timeline helps you understand what happens after you submit a
+              shipment request.
             </p>
           </div>
 
@@ -145,8 +194,10 @@ export default function HowItWorks() {
             {steps.slice(0, 4).map((item, index) => (
               <div className="timeline-item" key={item.title}>
                 <div className="timeline-dot">{index + 1}</div>
+
                 <div>
                   <h3>{item.title}</h3>
+
                   <p>{item.desc}</p>
                 </div>
               </div>
@@ -157,10 +208,13 @@ export default function HowItWorks() {
         <section className="benefits-section">
           <div className="benefit-left">
             <span className="how-kicker">Why This Process Works</span>
-            <h2>Fast Execution. Accurate Delivery. Better Coordination.</h2>
-            <p>
-              We keep the process simple and business-friendly. You have the route planning, coordination of the shipment, documentation guidance and tracking support in a single process you can trust.
 
+            <h2>Fast Execution. Accurate Delivery. Better Coordination.</h2>
+
+            <p>
+              We keep the process simple and business-friendly with route
+              planning, shipment coordination, documentation guidance and
+              tracking support in one trusted workflow.
             </p>
           </div>
 
@@ -168,19 +222,41 @@ export default function HowItWorks() {
             {benefits.map(([icon, title]) => (
               <div className="benefit-item" key={title}>
                 <Icon name={icon} />
+
                 <span>{title}</span>
               </div>
             ))}
           </div>
         </section>
+      <section
+          className="how-cta"
+          style={{
+            backgroundImage: `
+              linear-gradient(
+                rgba(130,0,0,0.72),
+                rgba(0,0,0,0.86)
+              ),
+              url(${ctaBg})
+            `,
+          }}
+        >
+          <div>
+            <span>Ready to move your shipment?</span>
 
+            <h2>Start with a Request. We’ll Handle the Rest.</h2>
+          </div>
+
+          <a href="/contact-us">Get Free Quote Now</a>
+        </section>
         <section className="quality-section">
           <div className="quality-card">
             <span className="how-kicker">Service Quality</span>
-            <h2>Moving Every Shipment with Care & Responsibility </h2>
-            <p>
-             Our team works with timely action, safe handling, and continuous communication for cargo pickup to destination delivery. This prevents unnecessary delays for businesses and ensures predictability of logistics.
 
+            <h2>Moving Every Shipment with Care & Responsibility</h2>
+
+            <p>
+              Our team works with timely action, safe handling and continuous
+              communication from cargo pickup to destination delivery.
             </p>
           </div>
 
@@ -192,13 +268,7 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        <section className="how-cta">
-          <div>
-            <span>Ready to move your shipment?</span>
-            <h2>Start with a Request. We’ll Handle the Rest. </h2>
-          </div>
-          <a href="/tracking">Get Free Quote Now</a>
-        </section>
+  
       </main>
     </div>
   );

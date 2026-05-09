@@ -16,7 +16,6 @@
   min-height: 90vh;
   align-items: center;
   padding: 120px 6% 80px;
-
   background:
     linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)),
     url("../assets/herobg.png") center/cover no-repeat;
@@ -28,7 +27,7 @@
 
 .clients-kicker {
   display: inline-block;
-  color: #e00000;
+  color: white;
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 2px;
@@ -71,7 +70,6 @@
 }
 
 .clients-intro p,
-.client-card p,
 .trust-content p,
 .message-card p {
   color: #666;
@@ -90,26 +88,71 @@
   gap: 25px;
 }
 
+/* IMAGE CARDS */
+
 .client-card {
   position: relative;
-  background: #fff;
-  padding: 34px;
-  border-radius: 16px;
-  border-top: 3px solid #e00000;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  min-height: 380px;
+  padding: 34px;
+  border-radius: 20px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  transition: 0.45s ease;
+}
+
+.client-card::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 20, 20, 0.26),
+      rgba(120, 0, 0, 0.16),
+      transparent 72%
+    );
+  top: -120px;
+  right: -120px;
+  z-index: 0;
+  transition: 0.5s ease;
+}
+
+.client-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.client-card:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 30px 70px rgba(180, 0, 0, 0.28),
+    0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+.client-card:hover::before {
+  transform: scale(1.2);
 }
 
 .client-icon {
   width: 68px;
   height: 68px;
-  background: rgba(224, 0, 0, 0.08);
-  color: #e00000;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff2a2a;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 14px;
   margin-bottom: 22px;
+  backdrop-filter: blur(10px);
 }
 
 .clients-svg-icon {
@@ -124,13 +167,23 @@
   top: 18px;
   font-size: 3.6rem;
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.05);
+  color: rgba(255, 255, 255, 0.18);
 }
 
 .client-card h3 {
-  font-size: 1.22rem;
+  color: #fff;
+  font-size: 1.28rem;
   margin: 0 0 12px;
 }
+
+.client-card p {
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* TRUST SECTION */
 
 .client-trust-section {
   display: grid;
@@ -249,7 +302,16 @@
   font-weight: 900;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: 0.3s ease;
 }
+
+.clients-cta a:hover {
+  background: #fff;
+  color: #111;
+  transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 991px) {
   .clients-hero {
@@ -310,6 +372,10 @@
   .message-card,
   .client-stat {
     padding: 28px 22px;
+  }
+
+  .client-card {
+    min-height: 330px;
   }
 
   .trust-point {
