@@ -1,137 +1,195 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import Header from "../components/navbar";
 import "../css/home.css";
+
 import truckVideo from "../assets/1sthero.mp4";
-import { FaTruck } from "react-icons/fa";
-import inboundImg from "../assets/2.png";
-import roadfreight from "../assets/1.png";
-import crossBorder from "../assets/3.png";
-import supportBg from "../assets/support.png";
-import service1 from "../assets/Road-Freight.png";
-import service2 from "../assets/cross-border.png";
-import service3 from "../assets/inbound-shipment.png";
-import ctaBg from "../assets/cta-bg.png";
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzLDVj2aSOavD85mBB9L2MQAbNoA69t1GiZLgT-G3AUbqOlp4VBoMuCM1EISARgHm1/exec";
+import aboutImg from "../assets/about-us.webp";
+import inbound from "../assets/inbound-shipment.png";
+import roadFreight from "../assets/road-freight.png";
+import crossBorder from "../assets/cross-border.png";
+import {
+  FiTruck,
+  FiMapPin,
+  FiBox,
+  FiSend,
+  FiArrowRight,
+  FiArrowLeft,
+  FiShield,
+  FiEye,
+  FiSliders,
+  FiUsers,
+  FiGlobe,
+  FiCheckCircle,
+  FiStar,
+} from "react-icons/fi";
 
-const whatWeProvide = [
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyzLDVj2aSOavD85mBB9L2MQAbNoA69t1GiZLgT-G3AUbqOlp4VBoMuCM1EISARgHm1/exec";
+
+const provideCards = [
   {
-    iconType: "box",
     title: "Inbound Shipments",
-    image: inboundImg,
-    desc: "Timely arrivals at your location...",
+    desc: "Smooth inbound logistics with faster receiving, better coordination, and reliable movement into your supply chain.",
+    link: "/services/inbound-shipments",
+    image: inbound,
   },
-
   {
-    iconType: "truck",
     title: "Road Freight",
-    image: roadfreight,
-    desc: "Dependable road freight services...",
+    desc: "Flexible road freight solutions designed for safe, on-time, and cost-effective cargo transportation.",
+    link: "/services/road-freight",
+    image: roadFreight,
   },
-
   {
-    iconType: "globe",
     title: "Cross Border Shipments",
+    desc: "Reliable cross-border shipment support with smooth documentation, route planning, and global reach.",
+    link: "/services/cross-border-shipments",
     image: crossBorder,
-    desc: "Intelligent cross border logistics...",
   },
 ];
 
-const services = [
+const focusCards = [
   {
-    title: "Road Freight",
-    image: service1,
-
-    desc: "Fast and secure road freight solutions designed for businesses that need dependable transportation across every route.",
-
-    link: "/services",
-  },
-
-  {
-    title: "Cross Border Shipments",
-    image: service2,
-
-    desc: "Smooth international logistics with customs support, real-time tracking and reliable border clearance operations.",
-
-    link: "/services",
-  },
-
-  {
-    title: "Inbound Shipments",
-    image: service3,
-
-    desc: "Efficient inbound shipment handling with streamlined coordination and warehouse integration support.",
-
-    link: "/services",
-  },
-];
-const testimonials = [
-  {
-    text: "Aside from being great professionals, we have been collaborating with MOVEXOLOG for some time already and is making life easy! Their deliveries are on time, and their team answers when needed,” he recounts.",
-    name: "Ricardo T.",
-    role: "CEO",
-  },
-  {
-    text: "We have tried several logistics companies before, but MOVEXOLOG has been the one we relied and trusted with. There is no needless delay and the communication is direct.",
-    name: "Aman K.",
-    role: "Operations Manager",
-  },
-  {
-    text: "So what I like is not to have to chase after it. Everybody just gets on with business, which is a super rare thing in this space.",
-    name: "Sarah L.",
-    role: "Supply Chain Head",
-  },
-  {
-    text: "Had a couple of urgent shipments and their team handled it better than expected. Rapid and no noncompliance at the end.",
-    name: "Daniel R.",
-    role: "Business Owner",
-  },
-  {
-    text: "Not perfect every single time but when something goes wrong, they take quick action. That’s what matters to me.”",
-    name: "Neha S.",
-    role: "Procurement Manager",
-  },
-];
-
-const focusItems = [
-  {
-    iconType: "clock",
-    title: "On-Time Delivery",
-    desc: "We orchestrate every move to guarantee that your shipments arrive on time, as promised—no delays, no excuses.",
-  },
-  {
-    iconType: "shield",
+    icon: <FiShield />,
     title: "Security & Trust",
     desc: "Your cargo matters. We treat every shipment with care and keep it safe, gaining your trust at each stage.",
   },
   {
-    iconType: "truck",
+    icon: <FiEye />,
     title: "Real-Time Visibility",
     desc: "Stay updated with clear shipment movement, route progress and delivery status so your logistics remain simple and transparent.",
+  },
+  {
+    icon: <FiSliders />,
+    title: "On-Time Delivery",
+    desc: "We orchestrate every move to guarantee that your shipments arrive on time, as promised—no delays, no excuses.",
+  },
+];
+
+const testimonials = [
+  {
+    text: "Transvera keeps our shipments moving smoothly with clear updates, careful coordination, and dependable delivery support every single time.",
+    name: "Michael Johnson",
+    role: "Operations Manager",
+  },
+  {
+    text: "Their logistics team understands pressure and handles every road freight request with patience, speed, and practical problem solving.",
+    name: "Sarah Williams",
+    role: "Supply Chain Director",
+  },
+  {
+    text: "Our cross border shipments became easier because Transvera managed communication, documents, tracking, and route planning very professionally overall.",
+    name: "David Patel",
+    role: "Logistics Head",
+  },
+  {
+    text: "Transvera improved our inbound deliveries with better scheduling, warehouse coordination, quick responses, and consistent shipment visibility every week.",
+    name: "Emily Carter",
+    role: "Procurement Lead",
+  },
+  {
+    text: "During urgent freight requirements, their team stayed calm, planned quickly, and delivered support without unnecessary confusion or delay.",
+    name: "Robert Wilson",
+    role: "Warehouse Manager",
+  },
+  {
+    text: "We appreciate Transvera because they keep every stakeholder informed, making daily shipment planning easier for our operations team.",
+    name: "Jessica Brown",
+    role: "Supply Planner",
+  },
+  {
+    text: "Their service feels reliable and human, with honest communication, logistics planning, and strong execution from start to finish.",
+    name: "Andrew Smith",
+    role: "Business Owner",
+  },
+  {
+    text: "Transvera made complex freight movement feel manageable through responsive support, transparent updates, and dependable delivery performance every day.",
+    name: "Priya Mehta",
+    role: "Operations Head",
   },
 ];
 
 const stats = [
-  ["truck", 12000, "Deliveries Last Year"],
-  ["box", 5500, "Load Moved Last Year"],
-  ["globe", 2300, "Load Moved Last Year"],
-  ["truck", 4200, "Load Moved Last Year"],
+  {
+    icon: <FiShield />,
+    value: "15+",
+    label: "Years of Experience",
+  },
+  {
+    icon: <FiUsers />,
+    value: "2,500+",
+    label: "Global Clients",
+  },
+  {
+    icon: <FiBox />,
+    value: "25M+",
+    label: "Shipments Delivered",
+  },
+  {
+    icon: <FiGlobe />,
+    value: "50+",
+    label: "Countries Served",
+  },
 ];
 
 export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
-  const [testimonialPage, setTestimonialPage] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const testimonialScrollRef = useRef(null);
 
   const [quoteForm, setQuoteForm] = useState({
     fullName: "",
     company: "",
     email: "",
     phone: "",
-    serviceType: "Road Freight",
-    route: "",
+    pickup: "",
+    delivery: "",
     details: "",
   });
+
+  const visibleTestimonials = useMemo(() => {
+    const total = testimonials.length;
+
+    return [0, 1, 2].map(
+      (offset) => testimonials[(testimonialIndex + offset) % total]
+    );
+  }, [testimonialIndex]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const goToTestimonial = (index) => {
+    const total = testimonials.length;
+    const nextIndex = (index + total) % total;
+
+    setTestimonialIndex(nextIndex);
+
+    setTimeout(() => {
+      const scroller = testimonialScrollRef.current;
+      if (!scroller) return;
+
+      const cards = scroller.querySelectorAll(".tv-testimonial-card");
+      const targetCard = cards[nextIndex];
+
+      if (targetCard) {
+        scroller.scrollTo({
+          left: targetCard.offsetLeft - scroller.offsetLeft,
+          behavior: "smooth",
+        });
+      }
+    }, 0);
+  };
+
+  const handlePrevTestimonial = () => {
+    goToTestimonial(testimonialIndex - 1);
+  };
+
+  const handleNextTestimonial = () => {
+    goToTestimonial(testimonialIndex + 1);
+  };
 
   const handleQuoteChange = (e) => {
     const { name, value } = e.target;
@@ -144,24 +202,12 @@ export default function Home() {
 
   const handleQuoteSubmit = async (e) => {
     e.preventDefault();
-
-    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YAHAN_APNA")) {
-      alert("Please add your Google Apps Script Web App URL first.");
-      return;
-    }
-
     setIsSubmitting(true);
 
     const formData = {
-      fullName: quoteForm.fullName,
-      company: quoteForm.company,
-      email: quoteForm.email,
-      phone: quoteForm.phone,
-      serviceType: quoteForm.serviceType,
-      route: quoteForm.route,
-      details: quoteForm.details,
+      ...quoteForm,
       date: new Date().toLocaleString(),
-      source: "Movexolog Home Quote Form",
+      source: "Transvera Home Quote Form",
     };
 
     try {
@@ -181,8 +227,8 @@ export default function Home() {
         company: "",
         email: "",
         phone: "",
-        serviceType: "Road Freight",
-        route: "",
+        pickup: "",
+        delivery: "",
         details: "",
       });
     } catch (error) {
@@ -193,106 +239,116 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTestimonialPage((prev) => {
-        if (window.innerWidth <= 600) {
-          return (prev + 1) % testimonials.length;
-        }
-
-        return prev + 3 >= testimonials.length ? 0 : prev + 1;
-      });
-    }, 10000);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <div className="movexolog-page">
+    <div className="transvera-home">
       <Helmet>
         <title>
-          Movexolog Logistics | Dispatch to Delivery Global Transport Solutions
+          Transvera Logistics | Dispatch to Delivery Transport Solutions
         </title>
 
         <meta
           name="description"
-          content="Movexolog offers reliable logistics, road freight, inbound shipments and cross-border transportation solutions."
+          content="Transvera provides reliable logistics, road freight, inbound shipments, cross-border shipments, tracking and scalable transport solutions."
         />
 
         <meta
           name="keywords"
-          content="logistics company, road freight, cross border shipping, inbound logistics, transport services, shipment tracking, freight services India, global logistics, supply chain solutions"
+          content="Transvera logistics, road freight, inbound shipments, cross border shipments, logistics company, transport solutions, freight forwarding, supply chain solutions"
         />
 
-        <meta name="author" content="Movexolog" />
-        <meta name="publisher" content="Movexolog Logistics" />
+        <meta name="author" content="Transvera" />
+        <meta name="publisher" content="Transvera Logistics" />
         <meta name="robots" content="index, follow" />
+        <meta name="theme-color" content="#0b6fff" />
 
-        <link rel="canonical" href="https://www.movexolog.com/" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="canonical" href="https://www.transvera.com/" />
 
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Movexolog Logistics | Dispatch to Delivery"
+          content="Transvera Logistics | Dispatch to Delivery"
         />
         <meta
           property="og:description"
-          content="Efficient logistics and transportation solutions with real-time tracking, global delivery and trusted supply chain management."
+          content="Reliable logistics solutions that move your business forward every mile, every time."
         />
-        <meta property="og:url" content="https://www.movexolog.com/" />
-        <meta property="og:image" content="https://www.movexolog.com/preview.jpg" />
+        <meta property="og:url" content="https://www.transvera.com/" />
+        <meta
+          property="og:image"
+          content="https://www.transvera.com/preview.jpg"
+        />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Movexolog Logistics" />
+        <meta
+          name="twitter:title"
+          content="Transvera Logistics | Dispatch to Delivery"
+        />
         <meta
           name="twitter:description"
-          content="Reliable logistics, freight and shipment services worldwide."
+          content="Road freight, inbound shipments and cross-border logistics solutions for growing businesses."
         />
-        <meta name="twitter:image" content="https://www.movexolog.com/preview.jpg" />
-
-        <meta name="geo.region" content="IN" />
-        <meta name="geo.placename" content="India" />
-        <meta name="theme-color" content="#cc0000" />
+        <meta
+          name="twitter:image"
+          content="https://www.transvera.com/preview.jpg"
+        />
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Movexolog",
-            url: "https://www.movexolog.com/",
-            logo: "https://www.movexolog.com/logo.png",
+            name: "Transvera",
+            url: "https://www.transvera.com/",
+            logo: "https://www.transvera.com/logo.png",
+            description:
+              "Transvera provides logistics, road freight, inbound shipment and cross-border shipment solutions.",
             sameAs: [
-              "https://facebook.com/",
-              "https://instagram.com/",
-              "https://linkedin.com/",
+              "https://www.facebook.com/",
+              "https://www.linkedin.com/",
+              "https://x.com/",
             ],
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: "+91-0000000000",
-              contactType: "customer service",
-              areaServed: "Worldwide",
-              availableLanguage: ["English"],
-            },
           })}
         </script>
 
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "LogisticsBusiness",
-            name: "Movexolog Logistics",
-            image: "https://www.movexolog.com/logo.png",
-            url: "https://www.movexolog.com/",
-            telephone: "+91-0000000000",
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: "IN",
+            "@type": "Service",
+            serviceType: "Logistics and Freight Services",
+            provider: {
+              "@type": "Organization",
+              name: "Transvera",
             },
             areaServed: "Worldwide",
-            description:
-              "Movexolog provides logistics, freight, inbound shipments and cross-border transportation services globally.",
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Transvera Logistics Services",
+              itemListElement: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Inbound Shipments",
+                    url: "https://www.transvera.com/services/inbound-shipments",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Road Freight",
+                    url: "https://www.transvera.com/services/road-freight",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Cross Border Shipments",
+                    url: "https://www.transvera.com/services/cross-border-shipments",
+                  },
+                },
+              ],
+            },
           })}
         </script>
       </Helmet>
@@ -300,519 +356,377 @@ export default function Home() {
       <Header />
 
       <main>
-        <section className="hero">
-          <video className="hero-video" autoPlay muted loop playsInline>
+        <section className="tv-hero">
+          <video className="tv-hero-video" autoPlay muted loop playsInline>
             <source src={truckVideo} type="video/mp4" />
           </video>
 
-          <div className="hero-overlay" />
+          <div className="tv-hero-overlay"></div>
 
-          <div className="hero-content">
-            <div className="hero-badge">
-              <Icon type="globe" /> GLOBAL LOGISTICS LEADER
-            </div>
-
-            <h1>Dispatch to Delivery MOVEXOLOG</h1>
+          <div className="tv-container tv-hero-content">
+            <h1> Dispatch to Delivery<br />
+              <span>Transvera</span>
+            </h1>
 
             <p>
-              Efficient, reliable and real-world logistics solutions built on
-              over ten years of industry expertise.
+              Efficient, reliable and real-world logistics solutions built on over ten years of industry expertise.
+
+
             </p>
 
-            <div className="hero-buttons">
-              <a href="/contact-us" className="btn-primary">
-                Contact Us
-              </a>
-              <a href="/about" className="btn-outline">
-                About Us
-              </a>
+            <div className="tv-hero-actions">
+              <Link to="/contact-us" className="tv-btn-primary">
+                Contact Us <FiArrowRight />
+              </Link>
+
+              <Link to="/about" className="tv-btn-light">
+                About Us <FiArrowRight />
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="brand-strip">
-          <div className="brand-item">
-            <Icon type="truck" />
-            <span>Fast Truck</span>
-          </div>
-          <div className="brand-item">
-            <Icon type="clock" />
-            <span>Quick Tk</span>
-          </div>
-          <div className="brand-item">
-            <Icon type="box" />
-            <span>Product</span>
-          </div>
-          <div className="brand-item">
-            <Icon type="truck" />
-            <span>Logistics</span>
-          </div>
-          <div className="brand-item">
-            <Icon type="shield" />
-            <span>Express</span>
-          </div>
-          <div className="brand-item">
-            <Icon type="truck" />
-            <span>Delivery</span>
-          </div>
-        </section>
-
-        <section id="services" className="light-section">
-          <SectionHeader
-            label="What We Provide"
-            title="Reliability You Can Count On"
-            sub=""
-          />
-
-          <div className="services-grid">
-            {whatWeProvide.map((item, index) => (
-              <div
-                className="service-card"
-                key={item.title}
-                style={{
-                  backgroundImage: `
-          linear-gradient(
-            rgba(0,0,0,0.72),
-            rgba(0,0,0,0.84)
-          ),
-          url(${item.image})
-        `,
-                }}
-              >
-                <div className="service-icon">
-                  <Icon type={item.iconType} />
-                </div>
-
-                <div className="card-number">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-
-                <h3>{item.title}</h3>
-
-                <p>{item.desc}</p>
+        <section className="tv-feature-strip">
+          <div className="tv-container tv-feature-grid">
+            <div className="tv-feature-card">
+              <FiTruck />
+              <div>
+                <h3>Fast Truck</h3>
+                <p>On-time, every time</p>
               </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="about" className="white-section">
-          <div className="about-row">
-            <div className="about-col-8">
-              <div className="section-label">ABOUT US</div>
-              <h2 className="section-title">
-                Trusted by Every Mile We Deliver
-              </h2>
-
-              <p>
-                We are an industry leader in global logistics, with a network
-                that drives efficiency across the supply chain through stable
-                positions and innovative partnerships with manufacturers.
-              </p>
-
-              <p>
-                We take a smart, real-world approach to providing an experience
-                that is both reliable and up-to-date with your needs delivering
-                true value while establishing some of the highest standards in
-                service, performance and operational excellence. Our commitment
-                is with ethical operations and a strong emphasis on successful
-                results for our clients.
-              </p>
             </div>
 
-            <div className="about-col-4">
-              <div className="skills-card">
-                <span className="big-bg-number">About</span>
+            <div className="tv-feature-card">
+              <FiMapPin />
+              <div>
+                <h3>Quick Track</h3>
+                <p>Real-time tracking</p>
+              </div>
+            </div>
 
-                <h3>Our Professional Experience & Skills</h3>
+            <div className="tv-feature-card">
+              <FiBox />
+              <div>
+                <h3>Product Logistics</h3>
+                <p>Safe & secure</p>
+              </div>
+            </div>
 
-                <Skill title="Road Freight" width="85%" />
-                <Skill title="Cross Border" width="72%" />
-                <Skill title="Inbound" width="80%" />
-
-                <a href="/contact-us" className="skill-btn">
-                  Appointment <Icon type="plane" />
-                </a>
+            <div className="tv-feature-card">
+              <FiSend />
+              <div>
+                <h3>Express Delivery</h3>
+                <p>When time matters</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          className="support-banner"
-          style={{
-            backgroundImage: `
-      linear-gradient(
-        rgba(0,0,0,0.78),
-        rgba(0,0,0,0.82)
-      ),
-      url(${supportBg})
-    `,
-          }}
-        >
-          <div>
-            <h3>Support That Never Sleeps</h3>
+        <section className="tv-section tv-provide-section">
+          <SectionTitle label="What We Provide" />
 
-            <h2>Need Immediate Support or Assistance?</h2>
+          <div className="tv-container tv-provide-grid">
+            {provideCards.map((item) => (
+              <Link to={item.link} className="tv-provide-card" key={item.title}>
+                <div className="tv-provide-image">
+                  <img src={item.image} alt={`${item.title} logistics service`} />
+                </div>
 
-            <p>
-              Our expert team is available 24/7 to help you, anytime.
-            </p>
-          </div>
-        </section>
-
-        <section className="light-section">
-          <SectionHeader
-            label="Our Services"
-            title="Reliability You Can Count On"
-            sub=""
-            centered
-          />
-
-          <div className="simple-services">
-            {services.map((item) => (
-              <div
-                className="simple-service-card"
-                key={item.title}
-                style={{
-                  backgroundImage: `
-        linear-gradient(
-          rgba(0,0,0,0.72),
-          rgba(0,0,0,0.86)
-        ),
-        url(${item.image})
-      `,
-                }}
-              >
-                <div className="service-content">
+                <div className="tv-provide-content">
                   <h3>{item.title}</h3>
-
                   <p>{item.desc}</p>
 
-                  <a href={item.link} className="service-link">
-                    Learn More
-                  </a>
+                  <span className="tv-provide-link">
+                    Explore Service <FiArrowRight />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="tv-section tv-about-section">
+          <div className="tv-container tv-about-grid">
+            <div className="tv-about-image">
+              <img
+                src={aboutImg}
+                alt="Transvera logistics warehouse and fleet"
+              />
+
+              <div className="tv-about-badge">
+                <FiShield />
+
+                <div>
+                  <h4>Trusted by Businesses Worldwide</h4>
+                  <p>Delivering excellence across every mile.</p>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="tv-about-content">
+              <span>About Us</span>
+
+              <h2>Trusted by Every Mile We Deliver</h2>
+
+              <p>
+                We are an industry leader in global logistics, with a network that drives efficiency across the supply chain through stable positions and innovative partnerships with manufacturers.
+
+                We take a smart, real-world approach to providing an experience that is both reliable and up-to-date with your needs delivering true value while establishing some of the highest standards in service, performance and operational excellence. Our commitment is with ethical operations and a strong emphasis on successful results for our clients.
+              </p>
+
+              <div className="tv-about-points">
+                <div>
+                  <FiGlobe />
+                  <strong>Global Network</strong>
+                </div>
+
+                <div>
+                  <FiTruck />
+                  <strong>Modern Fleet</strong>
+                </div>
+
+                <div>
+                  <FiUsers />
+                  <strong>Customer First</strong>
+                </div>
+              </div>
+
+              <Link to="/about" className="tv-inline-link">
+                Learn more about us <FiArrowRight />
+              </Link>
+            </div>
           </div>
         </section>
 
-        <section className="dark-section">
-          <SectionHeader
-            label="What We Do"
-            title="Our Focus. Your Advantage."
-            sub=""
-          />
+        <section className="tv-section tv-focus-quote-section">
+          <div className="tv-container tv-focus-quote-grid">
+            <div className="tv-focus-box">
+              <span>What We Do</span>
 
-          <div className="services-grid">
-            {focusItems.map((item) => (
-              <div className="std-card" key={item.title}>
-                <Icon type={item.iconType} />
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+              <h2>
+                Our Focus. <br />
+                Your Advantage.
+              </h2>
 
-
-
-        <section id="quote" className="quote-section">
-          <SectionHeader
-            label="Request a Quote"
-            title="Book Your Shipment with Ease"
-            sub=""
-            centered
-          />
-
-          <form className="quote-form" onSubmit={handleQuoteSubmit}>
-            <FormInput
-              label="Full Name"
-              name="fullName"
-              value={quoteForm.fullName}
-              onChange={handleQuoteChange}
-              placeholder="Your full name"
-              required
-            />
-
-            <FormInput
-              label="Company"
-              name="company"
-              value={quoteForm.company}
-              onChange={handleQuoteChange}
-              placeholder="Company name"
-            />
-
-            <FormInput
-              label="Email Address"
-              type="email"
-              name="email"
-              value={quoteForm.email}
-              onChange={handleQuoteChange}
-              placeholder="your@email.com"
-              required
-            />
-
-            <FormInput
-              label="Phone Number"
-              name="phone"
-              value={quoteForm.phone}
-              onChange={handleQuoteChange}
-              placeholder="+1 000 000 0000"
-              required
-            />
-
-            <div className="form-group">
-              <label>Service Type</label>
-              <select
-                name="serviceType"
-                value={quoteForm.serviceType}
-                onChange={handleQuoteChange}
-                required
-              >
-                <option value="Road Freight">Road Freight</option>
-                <option value="Cross Border Shipments">
-                  Cross Border Shipments
-                </option>
-                <option value="Inbound Shipments">Inbound Shipments</option>
-              </select>
-            </div>
-
-            <FormInput
-              label="Route / Destination"
-              name="route"
-              value={quoteForm.route}
-              onChange={handleQuoteChange}
-              placeholder="Origin → Destination"
-            />
-
-            <div className="form-group full">
-              <label>Additional Details</label>
-              <textarea
-                name="details"
-                value={quoteForm.details}
-                onChange={handleQuoteChange}
-                placeholder="Cargo type, weight, special requirements..."
-              />
-            </div>
-
-            <button className="btn-primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Send Quote Request"}
-            </button>
-          </form>
-          {showPopup && (
-            <div className="success-popup-overlay">
-              <div className="success-popup">
-                <h3>Form Submitted Successfully!</h3>
-
-                <p>
-                  Thank you for contacting Movexolog. Our team will contact you soon.
-                </p>
-
-                <button onClick={() => setShowPopup(false)}>
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
-        </section>
-
-        <section className="white-section">
-          <SectionHeader
-            label="Our Testimonials"
-            title="What Our Clients Say"
-            sub=""
-            centered
-          />
-
-          <div className="testimonial-slider">
-            <div className="testimonials-grid">
-              {testimonials.map((item, index) => {
-                const isActive =
-                  window.innerWidth <= 600
-                    ? index === testimonialPage
-                    : index >= testimonialPage && index < testimonialPage + 3;
-
-                return (
-                  <div
-                    className={`testimonial-card ${isActive ? "active" : ""}`}
-                    key={item.name}
-                  >
-                    <div className="stars">★★★★★</div>
-
-                    <p>{item.text}</p>
-
-                    <div className="testimonial-author">
-                      <div className="author-avatar">
-                        {item.name.slice(0, 2)}
-                      </div>
-
-                      <div className="author-info">
-                        <strong>{item.name}</strong>
-                        <span>{item.role}</span>
-                      </div>
-                    </div>
+              <div className="tv-focus-grid">
+                {focusCards.map((item) => (
+                  <div className="tv-focus-card" key={item.title}>
+                    <div>{item.icon}</div>
+                    <h3>{item.title}</h3>
+                    <p>{item.desc}</p>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
 
-            <div className="testimonial-dots">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className={testimonialPage === index ? "active" : ""}
-                  onClick={() => setTestimonialPage(index)}
+            <div className="tv-quote-box">
+              <span>Request a Quote</span>
+
+              <h2>
+                Get a Custom Quote <br />
+                Tailored to Your Needs
+              </h2>
+
+              <form onSubmit={handleQuoteSubmit}>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={quoteForm.fullName}
+                  onChange={handleQuoteChange}
+                  placeholder="Full Name"
+                  required
+                />
+
+                <input
+                  type="email"
+                  name="email"
+                  value={quoteForm.email}
+                  onChange={handleQuoteChange}
+                  placeholder="Email Address"
+                  required
+                />
+
+                <input
+                  type="text"
+                  name="company"
+                  value={quoteForm.company}
+                  onChange={handleQuoteChange}
+                  placeholder="Company Name"
+                />
+
+                <input
+                  type="tel"
+                  name="phone"
+                  value={quoteForm.phone}
+                  onChange={handleQuoteChange}
+                  placeholder="Phone Number"
+                  required
+                />
+
+                <input
+                  type="text"
+                  name="pickup"
+                  value={quoteForm.pickup}
+                  onChange={handleQuoteChange}
+                  placeholder="Pickup Location"
+                />
+
+                <input
+                  type="text"
+                  name="delivery"
+                  value={quoteForm.delivery}
+                  onChange={handleQuoteChange}
+                  placeholder="Delivery Location"
+                />
+
+                <textarea
+                  name="details"
+                  value={quoteForm.details}
+                  onChange={handleQuoteChange}
+                  placeholder="Type of Goods / Details"
+                />
+
+                <button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Get Quote Now"}
+                  <FiArrowRight />
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section className="tv-section tv-testimonials-section">
+          <SectionTitle label="What Our Clients Say" />
+
+          <div className="tv-container">
+            <div className="tv-testimonial-desktop">
+              <div className="tv-testimonial-grid">
+                {visibleTestimonials.map((item) => (
+                  <TestimonialCard
+                    item={item}
+                    key={`${item.name}-${item.role}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="tv-testimonial-mobile-scroll"
+              ref={testimonialScrollRef}
+            >
+              {testimonials.map((item) => (
+                <TestimonialCard
+                  item={item}
+                  key={`${item.name}-${item.role}`}
                 />
               ))}
             </div>
+
+            <div className="tv-testimonial-controls">
+              <button
+                type="button"
+                aria-label="Previous testimonial"
+                onClick={handlePrevTestimonial}
+              >
+                <FiArrowLeft />
+              </button>
+
+              <div className="tv-testimonial-dots">
+                {testimonials.map((_, index) => (
+                  <button
+                    type="button"
+                    key={index}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                    className={testimonialIndex === index ? "active" : ""}
+                    onClick={() => goToTestimonial(index)}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                aria-label="Next testimonial"
+                onClick={handleNextTestimonial}
+              >
+                <FiArrowRight />
+              </button>
+            </div>
           </div>
         </section>
-        <section className="stats-section">
-          <SectionHeader
-            label="Company Statistics"
-            title="We Are Professional Logistics & Transportations Agency"
-            sub=""
-            centered
-          />
 
-          <div className="company-stats-grid">
-            {stats.map(([icon, num, label]) => (
-              <div className="company-stat-card" key={`${num}-${label}`}>
-                <div className="stat-icon">
-                  <Icon type={icon} />
-                </div>
-
-                <h3>
-                  <Counter end={num} />
-                  <sup>+</sup>
-                </h3>
-
-                <p>{label}</p>
-
-                <div className="stat-line">
-                  <span />
-                </div>
+        <section className="tv-stats-section">
+          <div className="tv-container tv-stats-grid">
+            {stats.map((item) => (
+              <div className="tv-stat-card" key={item.label}>
+                <div>{item.icon}</div>
+                <h3>{item.value}</h3>
+                <p>{item.label}</p>
               </div>
             ))}
           </div>
         </section>
-
-        <section
-          className="home-cta"
-          style={{
-            backgroundImage: `
-      linear-gradient(
-        rgba(0,0,0,0.72),
-        rgba(0,0,0,0.82)
-      ),
-      url(${ctaBg})
-    `,
-          }}
-        >
-          <div>
-            <small>Our Newsletters</small>
-
-            <h2>Don’t Miss Our Offer Tips & Much More</h2>
-          </div>
-
-          <form>
-            <a href="/contact-us" className="skill-btn2">
-              Get Free Quote
-            </a>
-          </form>
-
-          <div className="cta-truck">
-            <FaTruck />
-          </div>
-        </section>
       </main>
+
+      {showPopup && (
+        <div className="tv-popup-overlay">
+          <div className="tv-popup">
+            <FiCheckCircle />
+
+            <h3>Form Submitted Successfully!</h3>
+
+            <p>
+              Thank you for contacting Transvera. Our team will contact you soon.
+            </p>
+
+            <button type="button" onClick={() => setShowPopup(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function SectionHeader({ label, title, sub, centered = false }) {
+function SectionTitle({ label }) {
   return (
-    <div className={`section-header ${centered ? "centered" : ""}`}>
-      {label && <div className="section-label">{label}</div>}
-      <h2 className="section-title">{title}</h2>
-      {sub && <p className="section-sub">{sub}</p>}
+    <div className="tv-section-heading">
+      <span></span>
+      <h2>{label}</h2>
+      <span></span>
     </div>
   );
 }
 
-function FormInput({ label, ...props }) {
+function TestimonialCard({ item }) {
   return (
-    <div className="form-group">
-      <label>{label}</label>
-      <input {...props} />
-    </div>
-  );
-}
+    <div className="tv-testimonial-card">
+      <FiStar className="quote-icon" />
 
-function Skill({ title, width }) {
-  return (
-    <div className="skill-item">
-      <strong>{title}</strong>
+      <p>{item.text}</p>
 
-      <div className="skill-bar">
-        <span style={{ width }} />
+      <div className="tv-testimonial-author">
+        <div className="tv-author-avatar">
+          {item.name
+            .split(" ")
+            .map((word) => word[0])
+            .join("")
+            .slice(0, 2)}
+        </div>
+
+        <div>
+          <h4>{item.name}</h4>
+          <span>{item.role}</span>
+
+          <div className="tv-stars">
+            <FiStar />
+            <FiStar />
+            <FiStar />
+            <FiStar />
+            <FiStar />
+          </div>
+        </div>
       </div>
     </div>
-  );
-}
-
-function Counter({ end }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let start = 0;
-    const duration = 1800;
-    const stepTime = 20;
-    const increment = end / (duration / stepTime);
-
-    const timer = setInterval(() => {
-      start += increment;
-
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, stepTime);
-
-    return () => clearInterval(timer);
-  }, [end]);
-
-  return count.toLocaleString();
-}
-
-function Icon({ type }) {
-  const icons = {
-    truck:
-      "M3 7h11v8H3V7zm11 3h3l3 3v2h-6v-5z M7 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
-    box: "M4 7l8-4 8 4-8 4-8-4zm0 0v10l8 4 8-4V7",
-    globe:
-      "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm-4-10h8m-8 0c0 4 2 8 4 8s4-4 4-8m-8 0c0-4 2-8 4-8s4 4 4 8",
-    clock:
-      "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm0-14v5l4 2",
-    shield:
-      "M12 2l7 3v6c0 5-3 9-7 11-4-2-7-6-7-11V5l7-3z",
-    plane:
-      "M22 2L11 13m11-11-7 20-4-9-9-4 20-7z",
-  };
-
-  return (
-    <svg className="mx-icon" viewBox="0 0 24 24" fill="none">
-      <path
-        d={icons[type]}
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

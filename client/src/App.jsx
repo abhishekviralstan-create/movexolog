@@ -12,6 +12,9 @@ import Footer from "./components/footer.jsx";
 import Contact from "./pages/contact-us.jsx";
 import Terms from "./pages/terms-and-conditions.jsx";
 import Privacy from "./pages/privacy-policy.jsx";
+import Inbound from "./pages/InboundShipment.jsx"
+import Roadfreight from "./pages/RoadFreight.jsx"
+import Crossb from "./pages/CrossBorderShipment.jsx"
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
         <Route path="/contact-us" element={<Contact />}/>
         <Route path="/terms-and-conditions" element={<Terms />}/>
         <Route path="/privacy-policy" element={<Privacy />}/>
+        <Route path="/services/inbound-shipments" element={<Inbound />}/>
+        <Route path="/services/road-freight" element={<Roadfreight />}/>
+        <Route path="/services/cross-border-shipments" element={<Crossb />}/>
       </Routes>
       <Footer />
     </HelmetProvider>
