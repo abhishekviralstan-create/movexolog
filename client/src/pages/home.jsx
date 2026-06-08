@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Header from "../components/navbar";
@@ -15,14 +15,15 @@ import {
   FiBox,
   FiSend,
   FiArrowRight,
-  FiArrowLeft,
   FiShield,
-  FiEye,
-  FiSliders,
   FiUsers,
   FiGlobe,
   FiCheckCircle,
   FiStar,
+  FiMessageSquare,
+  FiZap,
+  FiLock,
+  FiMap,
 } from "react-icons/fi";
 
 const GOOGLE_SCRIPT_URL =
@@ -49,64 +50,57 @@ const provideCards = [
   },
 ];
 
-const focusCards = [
+const operationCards = [
   {
-    icon: <FiShield />,
-    title: "Security & Trust",
-    desc: "Your cargo matters. We treat every shipment with care and keep it safe, gaining your trust at each stage.",
+    number: "01",
+    icon: <FiZap />,
+    title: "Lightning-Fast Operations",
+    desc: "99.2% on-time rates backed by real-time route planning and proactive load management systems.",
   },
   {
-    icon: <FiEye />,
-    title: "Real-Time Visibility",
-    desc: "Stay updated with clear shipment movement, route progress and delivery status so your logistics remain simple and transparent.",
+    number: "02",
+    icon: <FiLock />,
+    title: "Unmatched Reliability",
+    desc: "Fully insured freight with live GPS tracking on every shipment and cargo protection guarantees.",
   },
   {
-    icon: <FiSliders />,
-    title: "On-Time Delivery",
-    desc: "We orchestrate every move to guarantee that your shipments arrive on time, as promised—no delays, no excuses.",
+    number: "03",
+    icon: <FiMap />,
+    title: "48-State Coverage",
+    desc: "Comprehensive network with 120+ strategically positioned hubs across every major metro area.",
   },
 ];
 
 const testimonials = [
   {
-    text: "Transvera keeps our shipments moving smoothly with clear updates, careful coordination, and dependable delivery support every single time.",
-    name: "Michael Johnson",
-    role: "Operations Manager",
+    text: "TRANSVERA completely transformed our supply chain. What used to take 5 days now takes 2. Their platform is miles ahead of any carrier we've used. We've scaled from 200 to 2,000 monthly shipments without a single hiccup.",
+    name: "Michael Reynolds",
+    role: "VP Supply Chain, NovaBuild Corp",
+    color: "blue",
   },
   {
-    text: "Their logistics team understands pressure and handles every road freight request with patience, speed, and practical problem solving.",
-    name: "Sarah Williams",
-    role: "Supply Chain Director",
+    text: "Switched to TRANSVERA 18 months ago and never looked back. On-time rate is genuinely 99%+ — I’ve verified it myself. Best logistics partner we’ve ever had.",
+    name: "Sarah Lin",
+    role: "COO, Meridian E-Commerce",
+    color: "purple",
   },
   {
-    text: "Our cross border shipments became easier because Transvera managed communication, documents, tracking, and route planning very professionally overall.",
-    name: "David Patel",
-    role: "Logistics Head",
+    text: "Healthcare logistics requires zero margin for error. TRANSVERA delivers every single time — temperature-controlled, on-schedule, always reachable.",
+    name: "Dr. David Kim",
+    role: "Director, HealthFirst Supply",
+    color: "cyan",
   },
   {
-    text: "Transvera improved our inbound deliveries with better scheduling, warehouse coordination, quick responses, and consistent shipment visibility every week.",
-    name: "Emily Carter",
-    role: "Procurement Lead",
+    text: "Route optimization alone saved us 22% on fuel in Q1. TRANSVERA’s tech is genuinely impressive. Highly recommend for any manufacturing operation.",
+    name: "Alex Torres",
+    role: "Logistics Manager, TerraFab Inc.",
+    color: "orange",
   },
   {
-    text: "During urgent freight requirements, their team stayed calm, planned quickly, and delivered support without unnecessary confusion or delay.",
-    name: "Robert Wilson",
-    role: "Warehouse Manager",
-  },
-  {
-    text: "We appreciate Transvera because they keep every stakeholder informed, making daily shipment planning easier for our operations team.",
-    name: "Jessica Brown",
-    role: "Supply Planner",
-  },
-  {
-    text: "Their service feels reliable and human, with honest communication, logistics planning, and strong execution from start to finish.",
-    name: "Andrew Smith",
-    role: "Business Owner",
-  },
-  {
-    text: "Transvera made complex freight movement feel manageable through responsive support, transparent updates, and dependable delivery performance every day.",
-    name: "Priya Mehta",
-    role: "Operations Head",
+    text: "From onboarding to daily execution, TRANSVERA is seamless. Our retail distribution is faster and more reliable than ever. The team goes above and beyond.",
+    name: "Jessica Walsh",
+    role: "Head of Operations, BlueLeaf Retail",
+    color: "pink",
   },
 ];
 
@@ -132,64 +126,65 @@ const stats = [
     label: "Countries Served",
   },
 ];
+const API_BASE = "http://localhost:5000";
 
+const getBlogImage = (blog) => {
+  const img = blog.image || blog.featuredImage || blog.thumbnail || blog.coverImage;
+
+  if (!img) return "";
+
+  if (img.startsWith("http")) return img;
+
+  if (img.startsWith("/uploads")) {
+    return `${API_BASE}${img}`;
+  }
+
+  return `${API_BASE}/${img}`;
+};
+
+const getBlogDescription = (blog) => {
+  const text =
+    blog.shortDescription ||
+    blog.description ||
+    blog.metaDescription ||
+    blog.excerpt ||
+    "";
+
+  return text.replace(/<[^>]*>/g, "").slice(0, 120);
+};
+
+const getBlogLink = (blog) => {
+  return `/blogs/${blog.slug || blog._id}`;
+};
 export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const testimonialScrollRef = useRef(null);
-
+  const [latestBlogs, setLatestBlogs] = useState([]);
   const [quoteForm, setQuoteForm] = useState({
     fullName: "",
     company: "",
     email: "",
     phone: "",
-    pickup: "",
-    delivery: "",
-    details: "",
+    service: "",
+    message: "",
   });
 
-  const visibleTestimonials = useMemo(() => {
-    const total = testimonials.length;
+useEffect(() => {
+  window.scrollTo(0, 0);
 
-    return [0, 1, 2].map(
-      (offset) => testimonials[(testimonialIndex + offset) % total]
-    );
-  }, [testimonialIndex]);
+  const fetchLatestBlogs = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/blogs?limit=3");
+      const data = await res.json();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const goToTestimonial = (index) => {
-    const total = testimonials.length;
-    const nextIndex = (index + total) % total;
-
-    setTestimonialIndex(nextIndex);
-
-    setTimeout(() => {
-      const scroller = testimonialScrollRef.current;
-      if (!scroller) return;
-
-      const cards = scroller.querySelectorAll(".tv-testimonial-card");
-      const targetCard = cards[nextIndex];
-
-      if (targetCard) {
-        scroller.scrollTo({
-          left: targetCard.offsetLeft - scroller.offsetLeft,
-          behavior: "smooth",
-        });
-      }
-    }, 0);
+      setLatestBlogs(data.blogs || data.slice?.(0, 3) || []);
+    } catch (error) {
+      console.error("Latest blogs fetch error:", error);
+    }
   };
 
-  const handlePrevTestimonial = () => {
-    goToTestimonial(testimonialIndex - 1);
-  };
-
-  const handleNextTestimonial = () => {
-    goToTestimonial(testimonialIndex + 1);
-  };
+  fetchLatestBlogs();
+}, []);
 
   const handleQuoteChange = (e) => {
     const { name, value } = e.target;
@@ -227,9 +222,8 @@ export default function Home() {
         company: "",
         email: "",
         phone: "",
-        pickup: "",
-        delivery: "",
-        details: "",
+        service: "",
+        message: "",
       });
     } catch (error) {
       console.error("Quote form submit error:", error);
@@ -364,14 +358,15 @@ export default function Home() {
           <div className="tv-hero-overlay"></div>
 
           <div className="tv-container tv-hero-content">
-            <h1> Dispatch to Delivery<br />
+            <h1>
+              Dispatch to Delivery
+              <br />
               <span>Transvera</span>
             </h1>
 
             <p>
-              Efficient, reliable and real-world logistics solutions built on over ten years of industry expertise.
-
-
+              Efficient, reliable and real-world logistics solutions built on
+              over ten years of industry expertise.
             </p>
 
             <div className="tv-hero-actions">
@@ -422,8 +417,27 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="tv-operation-section">
+          <div className="tv-container tv-operation-grid">
+            {operationCards.map((item) => (
+              <div className="tv-operation-card" key={item.title}>
+                <span className="tv-op-dot" />
+                <strong>{item.number}</strong>
+                <h3>
+                  {item.icon}
+                  {item.title}
+                </h3>
+                <p>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="tv-section tv-provide-section">
-          <SectionTitle label="What We Provide" />
+          <SectionTitle
+            label="What We Provide"
+            title="Services Built For Reliable Freight Movement"
+          />
 
           <div className="tv-container tv-provide-grid">
             {provideCards.map((item) => (
@@ -469,9 +483,9 @@ export default function Home() {
               <h2>Trusted by Every Mile We Deliver</h2>
 
               <p>
-                We are an industry leader in global logistics, with a network that drives efficiency across the supply chain through stable positions and innovative partnerships with manufacturers.
-
-                We take a smart, real-world approach to providing an experience that is both reliable and up-to-date with your needs delivering true value while establishing some of the highest standards in service, performance and operational excellence. Our commitment is with ethical operations and a strong emphasis on successful results for our clients.
+                We are an industry leader in global logistics, with a network
+                that drives efficiency across the supply chain through stable
+                positions and innovative partnerships with manufacturers.
               </p>
 
               <div className="tv-about-points">
@@ -498,158 +512,194 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="tv-section tv-focus-quote-section">
-          <div className="tv-container tv-focus-quote-grid">
-            <div className="tv-focus-box">
-              <span>What We Do</span>
+        <section className="tv-section tv-testimonials-section">
+          <div className="tv-container">
+            <div className="tv-testimonials-heading">
+              <span>
+                <FiStar /> Client Reviews
+              </span>
 
               <h2>
-                Our Focus. <br />
-                Your Advantage.
+                What Our Clients <b>Are Saying</b>
               </h2>
 
-              <div className="tv-focus-grid">
-                {focusCards.map((item) => (
-                  <div className="tv-focus-card" key={item.title}>
-                    <div>{item.icon}</div>
-                    <h3>{item.title}</h3>
-                    <p>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
+              <p>
+                Real stories from real businesses trusting TRANSVERA to move
+                America's freight.
+              </p>
             </div>
 
-            <div className="tv-quote-box">
-              <span>Request a Quote</span>
-
-              <h2>
-                Get a Custom Quote <br />
-                Tailored to Your Needs
-              </h2>
-
-              <form onSubmit={handleQuoteSubmit}>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={quoteForm.fullName}
-                  onChange={handleQuoteChange}
-                  placeholder="Full Name"
-                  required
-                />
-
-                <input
-                  type="email"
-                  name="email"
-                  value={quoteForm.email}
-                  onChange={handleQuoteChange}
-                  placeholder="Email Address"
-                  required
-                />
-
-                <input
-                  type="text"
-                  name="company"
-                  value={quoteForm.company}
-                  onChange={handleQuoteChange}
-                  placeholder="Company Name"
-                />
-
-                <input
-                  type="tel"
-                  name="phone"
-                  value={quoteForm.phone}
-                  onChange={handleQuoteChange}
-                  placeholder="Phone Number"
-                  required
-                />
-
-                <input
-                  type="text"
-                  name="pickup"
-                  value={quoteForm.pickup}
-                  onChange={handleQuoteChange}
-                  placeholder="Pickup Location"
-                />
-
-                <input
-                  type="text"
-                  name="delivery"
-                  value={quoteForm.delivery}
-                  onChange={handleQuoteChange}
-                  placeholder="Delivery Location"
-                />
-
-                <textarea
-                  name="details"
-                  value={quoteForm.details}
-                  onChange={handleQuoteChange}
-                  placeholder="Type of Goods / Details"
-                />
-
-                <button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Get Quote Now"}
-                  <FiArrowRight />
-                </button>
-              </form>
+            <div className="tv-testimonial-grid">
+              {testimonials.map((item, index) => (
+                <TestimonialCard item={item} index={index} key={item.name} />
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="tv-section tv-testimonials-section">
-          <SectionTitle label="What Our Clients Say" />
 
-          <div className="tv-container">
-            <div className="tv-testimonial-desktop">
-              <div className="tv-testimonial-grid">
-                {visibleTestimonials.map((item) => (
-                  <TestimonialCard
-                    item={item}
-                    key={`${item.name}-${item.role}`}
-                  />
-                ))}
-              </div>
+<section className="tv-section tv-latest-blogs-section">
+  <div className="tv-container">
+    <div className="tv-testimonials-heading">
+      <span>
+        <FiMessageSquare /> Latest Blogs
+      </span>
+
+      <h2>
+        Latest Logistics <b>Insights</b>
+      </h2>
+
+      <p>
+        Read the latest updates, guides, and insights from Transvera.
+      </p>
+    </div>
+
+    <div className="tv-latest-blog-grid">
+      {latestBlogs.map((blog) => {
+        const imageUrl = blog.image?.startsWith("http")
+          ? blog.image
+          : `http://localhost:5000/${blog.image}`;
+
+        return (
+          <Link
+        to={getBlogLink(blog)}
+            className="tv-latest-blog-card"
+            key={blog._id}
+          >
+            <div className="tv-latest-blog-img">
+<img src={getBlogImage(blog)} alt={blog.title} />
             </div>
 
-            <div
-              className="tv-testimonial-mobile-scroll"
-              ref={testimonialScrollRef}
-            >
-              {testimonials.map((item) => (
-                <TestimonialCard
-                  item={item}
-                  key={`${item.name}-${item.role}`}
-                />
-              ))}
+            <div className="tv-latest-blog-content">
+              <span>
+                {blog.createdAt
+                  ? new Date(blog.createdAt).toLocaleDateString()
+                  : "Latest Blog"}
+              </span>
+
+              <h3>{blog.title}</h3>
+
+              <p>
+             {getBlogDescription(blog)}
+              </p>
+
+              <strong>
+                Read More <FiArrowRight />
+              </strong>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+
+    <div className="tv-latest-blog-btn-wrap">
+      <Link to="/blogs" className="tv-btn-primary">
+        View All Blogs <FiArrowRight />
+      </Link>
+    </div>
+  </div>
+</section>
+
+        <section className="tv-section tv-quote-section">
+          <div className="tv-container tv-quote-grid">
+            <div className="tv-quote-form-card">
+              <h2>Request a Quote</h2>
+
+              <p>A logistics specialist will contact you within 4 hours.</p>
+
+              <form onSubmit={handleQuoteSubmit}>
+                <div className="tv-field">
+                  <label>Full Name *</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={quoteForm.fullName}
+                    onChange={handleQuoteChange}
+                    placeholder="John Smith"
+                    required
+                  />
+                </div>
+
+                <div className="tv-field">
+                  <label>Company *</label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={quoteForm.company}
+                    onChange={handleQuoteChange}
+                    placeholder="Your Company"
+                    required
+                  />
+                </div>
+
+                <div className="tv-field">
+                  <label>Email *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={quoteForm.email}
+                    onChange={handleQuoteChange}
+                    placeholder="john@company.com"
+                    required
+                  />
+                </div>
+
+                <div className="tv-field">
+                  <label>Phone</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={quoteForm.phone}
+                    onChange={handleQuoteChange}
+                    placeholder="+1 (555) 000-0000"
+                  />
+                </div>
+
+                <div className="tv-field full">
+                  <label>Service Needed</label>
+                  <select
+                    name="service"
+                    value={quoteForm.service}
+                    onChange={handleQuoteChange}
+                  >
+                    <option value="">Select a service...</option>
+                    <option value="Inbound Shipments">Inbound Shipments</option>
+                    <option value="Road Freight">Road Freight</option>
+                    <option value="Cross Border Shipments">
+                      Cross Border Shipments
+                    </option>
+                  </select>
+                </div>
+
+                <div className="tv-field full">
+                  <label>Message</label>
+                  <textarea
+                    name="message"
+                    value={quoteForm.message}
+                    onChange={handleQuoteChange}
+                    placeholder="Tell us about your logistics needs, volume, destinations, and timeline..."
+                  />
+                </div>
+
+                <button type="submit" disabled={isSubmitting}>
+                  {isSubmitting
+                    ? "Sending..."
+                    : "Send Inquiry — We'll Respond in 4 Hours →"}
+                </button>
+              </form>
             </div>
 
-            <div className="tv-testimonial-controls">
-              <button
-                type="button"
-                aria-label="Previous testimonial"
-                onClick={handlePrevTestimonial}
-              >
-                <FiArrowLeft />
-              </button>
+            <div className="tv-quote-image-card">
+              <img src={aboutImg} alt="Transvera logistics quote support" />
 
-              <div className="tv-testimonial-dots">
-                {testimonials.map((_, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                    className={testimonialIndex === index ? "active" : ""}
-                    onClick={() => goToTestimonial(index)}
-                  />
-                ))}
+              <div>
+                <FiSend />
+                <h3>Fast Quote Support</h3>
+                <p>
+                  Share your shipment details and our logistics team will guide
+                  you with the best movement plan.
+                </p>
               </div>
-
-              <button
-                type="button"
-                aria-label="Next testimonial"
-                onClick={handleNextTestimonial}
-              >
-                <FiArrowRight />
-              </button>
             </div>
           </div>
         </section>
@@ -665,6 +715,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+
       </main>
 
       {showPopup && (
@@ -688,25 +739,24 @@ export default function Home() {
   );
 }
 
-function SectionTitle({ label }) {
+function SectionTitle({ label, title }) {
   return (
     <div className="tv-section-heading">
-      <span></span>
-      <h2>{label}</h2>
-      <span></span>
+      <span>{label}</span>
+      <h2>{title}</h2>
     </div>
   );
 }
 
-function TestimonialCard({ item }) {
+function TestimonialCard({ item, index }) {
   return (
-    <div className="tv-testimonial-card">
-      <FiStar className="quote-icon" />
+    <div className={`tv-testimonial-card ${index === 0 ? "featured" : ""}`}>
+      <div className={`tv-rating ${item.color}`}>★★★★★</div>
 
-      <p>{item.text}</p>
+      <p>"{item.text}"</p>
 
       <div className="tv-testimonial-author">
-        <div className="tv-author-avatar">
+        <div className={`tv-author-avatar ${item.color}`}>
           {item.name
             .split(" ")
             .map((word) => word[0])
@@ -717,16 +767,10 @@ function TestimonialCard({ item }) {
         <div>
           <h4>{item.name}</h4>
           <span>{item.role}</span>
-
-          <div className="tv-stars">
-            <FiStar />
-            <FiStar />
-            <FiStar />
-            <FiStar />
-            <FiStar />
-          </div>
         </div>
       </div>
+
+      <div className="tv-quote-mark">“</div>
     </div>
   );
 }

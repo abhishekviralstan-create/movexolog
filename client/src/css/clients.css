@@ -798,3 +798,139 @@ body,
     font-size: 1.65rem;
   }
 }
+/* =====================================
+   HOME PAGE CARD COLORS - CLIENTS PAGE
+===================================== */
+
+/* CLIENT TYPE CARDS */
+
+.clients-type-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.clients-type-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.clients-type-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.clients-type-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* TRUST CARDS */
+
+.clients-trust-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.clients-trust-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.clients-trust-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.clients-trust-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* STATS CARDS */
+
+.clients-stat-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.clients-stat-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.clients-stat-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.clients-stat-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* PROCESS STEPS */
+
+.clients-process-steps div:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.clients-process-steps div:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.clients-process-steps div:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.clients-process-steps div:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* ICONS */
+
+.clients-type-icon,
+.clients-trust-icon,
+.clients-stat-card div{
+  background:#FFFFFF !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* PROCESS ICONS */
+
+.clients-process-steps svg{
+  color:#096FFF !important;
+}
+
+/* NUMBER COLORS */
+
+.clients-type-card:nth-child(1) .clients-count{
+  color:rgba(7,131,255,.15)!important;
+}
+
+.clients-type-card:nth-child(2) .clients-count{
+  color:rgba(114,87,255,.15)!important;
+}
+
+.clients-type-card:nth-child(3) .clients-count{
+  color:rgba(16,207,209,.15)!important;
+}
+
+.clients-type-card:nth-child(4) .clients-count{
+  color:rgba(7,131,255,.15)!important;
+}
+
+/* PREMIUM HOVER */
+
+.clients-type-card,
+.clients-trust-card,
+.clients-stat-card,
+.clients-process-steps div{
+  transition:all .35s ease !important;
+}
+
+.clients-type-card:hover,
+.clients-trust-card:hover,
+.clients-stat-card:hover,
+.clients-process-steps div:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 28px 65px rgba(31,73,125,.12)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}
+
+/* REMOVE ANY OLD EFFECTS */
+
+.clients-type-card::before,
+.clients-type-card::after,
+.clients-trust-card::before,
+.clients-trust-card::after{
+  display:none !important;
+}

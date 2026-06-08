@@ -60,10 +60,10 @@ const introCards = [
 ];
 
 const approachFeatures = [
-  "Reliable freight planning",
-  "Clear communication",
-  "Trusted delivery network",
-  "Scalable business support",
+  // "Reliable freight planning",
+  // "Clear communication",
+  // "Trusted delivery network",
+  // "Scalable business support",
 ];
 
 const chooseList = [
@@ -212,7 +212,7 @@ export default function AboutUs() {
             <div className="about-hero-content-tv">
            
 
-              <h1>Trusted Logistics for a Modern World</h1>
+              <h1>About Us</h1>
 
               <p>
                 We provide logistics solutions across industries with a strong

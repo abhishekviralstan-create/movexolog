@@ -787,3 +787,129 @@ body,
     font-size: 1.65rem;
   }
 }
+/* =====================================
+   HOME PAGE CARD COLORS - HOW IT WORKS
+===================================== */
+
+/* WORKFLOW STEP CARDS */
+
+.how-step-card:nth-child(1),
+.how-step-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.how-step-card:nth-child(2),
+.how-step-card:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.how-step-card:nth-child(3),
+.how-step-card:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* REMOVE CIRCLE EFFECT */
+
+.how-step-card::after{
+  display:none !important;
+}
+
+/* BENEFIT CARDS */
+
+.how-benefit-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.how-benefit-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.how-benefit-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.how-benefit-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* QUALITY CARDS */
+
+.how-quality-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.how-quality-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.how-quality-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.how-quality-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* PROCESS TIMELINE CARDS */
+
+.how-process-steps div:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.how-process-steps div:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.how-process-steps div:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.how-process-steps div:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* WHITE ICON STYLE */
+
+.how-step-icon,
+.how-benefit-card > span,
+.how-quality-icon,
+.how-process-steps svg{
+  background:#FFFFFF !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* STEP NUMBER COLORS */
+
+.how-step-card:nth-child(1) .how-step-number,
+.how-step-card:nth-child(4) .how-step-number{
+  color:rgba(7,131,255,.15)!important;
+}
+
+.how-step-card:nth-child(2) .how-step-number,
+.how-step-card:nth-child(5) .how-step-number{
+  color:rgba(114,87,255,.15)!important;
+}
+
+.how-step-card:nth-child(3) .how-step-number,
+.how-step-card:nth-child(6) .how-step-number{
+  color:rgba(16,207,209,.15)!important;
+}
+
+/* PREMIUM HOVER */
+
+.how-step-card,
+.how-benefit-card,
+.how-quality-card,
+.how-process-steps div{
+  transition:all .35s ease !important;
+}
+
+.how-step-card:hover,
+.how-benefit-card:hover,
+.how-quality-card:hover,
+.how-process-steps div:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 28px 65px rgba(31,73,125,.12)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}

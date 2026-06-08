@@ -1082,3 +1082,22 @@ body,
     font-size: 0.9rem;
   }
 }
+.choose-card-tv:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.choose-card-tv:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.choose-card-tv:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.choose-card-tv:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.choose-card-tv:nth-child(5){
+  background:#EEE8FF !important;
+}

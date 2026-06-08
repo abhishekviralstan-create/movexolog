@@ -112,7 +112,11 @@ export default function Navbar() {
               How It Works
             </NavLink>
           </li>
-
+          <li>
+            <NavLink to="/blogs" onClick={closeMenu}>
+              Blogs
+            </NavLink>
+          </li>
           <li>
             <NavLink to="/clients" onClick={closeMenu}>
               Clients

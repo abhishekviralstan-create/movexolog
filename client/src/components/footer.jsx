@@ -57,8 +57,8 @@ export default function Footer() {
           <h4>Our Services</h4>
 
           <ul>
+            <li><Link to="/services/inbound-shipments">Inbound Shipment</Link></li>
             <li><Link to="/services/road-freight">Road Freight</Link></li>
-            <li><Link to="/services/freight-forwarding">Freight Forwarding</Link></li>
             <li><Link to="/services/cross-border-shipments">Cross Border Shipments</Link></li>
           </ul>
         </div>

@@ -916,3 +916,125 @@ body,
     padding: 22px 18px;
   }
 }
+/* ====================================
+   HOME PAGE STYLE CARD COLORS
+   ROAD FREIGHT PAGE
+==================================== */
+
+/* Overview Cards */
+.road-overview-stat:nth-child(1){
+  background:#EAF5FF !important;
+  border-color:rgba(7,131,255,.18)!important;
+}
+
+.road-overview-stat:nth-child(2){
+  background:#EEE8FF !important;
+  border-color:rgba(114,87,255,.18)!important;
+}
+
+.road-overview-stat:nth-child(3){
+  background:#D9F8F4 !important;
+  border-color:rgba(16,207,209,.18)!important;
+}
+
+/* Features Cards */
+.road-feature-card:nth-child(1),
+.road-feature-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.road-feature-card:nth-child(2),
+.road-feature-card:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.road-feature-card:nth-child(3),
+.road-feature-card:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* Fleet Cards */
+.road-fleet-item:nth-child(1),
+.road-fleet-item:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.road-fleet-item:nth-child(2),
+.road-fleet-item:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.road-fleet-item:nth-child(3),
+.road-fleet-item:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* Benefits Cards */
+.road-benefit-card:nth-child(1),
+.road-benefit-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.road-benefit-card:nth-child(2),
+.road-benefit-card:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.road-benefit-card:nth-child(3),
+.road-benefit-card:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* Process Cards */
+.road-process-steps div:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.road-process-steps div:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.road-process-steps div:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.road-process-steps div:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* White Icon Box */
+.road-feature-icon,
+.road-overview-stat span,
+.road-benefit-card > span,
+.road-fleet-item svg,
+.road-process-steps svg{
+  background:#ffffff !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* Premium Hover */
+.road-feature-card,
+.road-overview-stat,
+.road-benefit-card,
+.road-fleet-item,
+.road-process-steps div{
+  transition:all .35s ease !important;
+}
+
+.road-feature-card:hover,
+.road-overview-stat:hover,
+.road-benefit-card:hover,
+.road-fleet-item:hover,
+.road-process-steps div:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 30px 70px rgba(31,73,125,.14)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}
+
+/* Floating Gradient Glow */
+.road-feature-card::before,
+.road-overview-stat::before,
+.road-benefit-card::before{
+  display:none !important;
+}

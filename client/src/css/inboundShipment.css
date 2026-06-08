@@ -782,3 +782,96 @@ body,
     font-size: 0.9rem;
   }
 }
+/* SAME AS HOME CARD THEME */
+
+/* Overview 3 cards */
+.inbound-overview-stat:nth-child(1),
+.inbound-feature-card:nth-child(1),
+.inbound-benefit-card:nth-child(1),
+.inbound-industry-card:nth-child(1),
+.inbound-process-steps div:nth-child(1) {
+  background: #eaf5ff !important;
+  border-color: rgba(9, 111, 255, 0.18) !important;
+}
+
+.inbound-overview-stat:nth-child(2),
+.inbound-feature-card:nth-child(2),
+.inbound-benefit-card:nth-child(2),
+.inbound-industry-card:nth-child(2),
+.inbound-process-steps div:nth-child(2) {
+  background: #eee8ff !important;
+  border-color: rgba(114, 87, 255, 0.22) !important;
+}
+
+.inbound-overview-stat:nth-child(3),
+.inbound-feature-card:nth-child(3),
+.inbound-benefit-card:nth-child(3),
+.inbound-industry-card:nth-child(3),
+.inbound-process-steps div:nth-child(3) {
+  background: #d9f8f4 !important;
+  border-color: rgba(16, 207, 209, 0.24) !important;
+}
+
+/* Repeat colors for extra cards */
+.inbound-feature-card:nth-child(4),
+.inbound-benefit-card:nth-child(4),
+.inbound-industry-card:nth-child(4),
+.inbound-process-steps div:nth-child(4) {
+  background: #eaf5ff !important;
+}
+
+.inbound-feature-card:nth-child(5),
+.inbound-benefit-card:nth-child(5),
+.inbound-industry-card:nth-child(5) {
+  background: #eee8ff !important;
+}
+
+.inbound-feature-card:nth-child(6),
+.inbound-benefit-card:nth-child(6),
+.inbound-industry-card:nth-child(6) {
+  background: #d9f8f4 !important;
+}
+
+/* Icons */
+.inbound-overview-stat span,
+.inbound-feature-icon,
+.inbound-benefit-card svg,
+.inbound-industry-card div,
+.inbound-process-steps svg {
+  background: #ffffff !important;
+  color: #096fff !important;
+  box-shadow: 0 10px 24px rgba(9, 111, 255, 0.08) !important;
+}
+
+/* Premium hover animation */
+.inbound-overview-stat,
+.inbound-feature-card,
+.inbound-benefit-card,
+.inbound-industry-card,
+.inbound-process-steps div {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+.inbound-overview-stat:hover,
+.inbound-feature-card:hover,
+.inbound-benefit-card:hover,
+.inbound-industry-card:hover,
+.inbound-process-steps div:hover {
+  transform: translateY(-9px) !important;
+  box-shadow: 0 30px 75px rgba(31, 73, 125, 0.16) !important;
+  border-color: rgba(9, 111, 255, 0.28) !important;
+}
+
+/* Remove old blue hover from industry cards */
+.inbound-industry-card:hover {
+  background: inherit !important;
+}
+
+.inbound-industry-card:hover span {
+  color: #071943 !important;
+}
+
+.inbound-industry-card:hover div {
+  background: #ffffff !important;
+  color: #096fff !important;
+}

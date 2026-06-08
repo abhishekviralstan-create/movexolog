@@ -984,3 +984,130 @@ body,
     padding: 22px 18px;
   }
 }
+/* =====================================
+   HOME PAGE CARD COLORS - CROSS BORDER
+===================================== */
+
+/* OVERVIEW CARDS */
+
+.cross-overview-stat:nth-child(1){
+  background:#EAF5FF !important;
+  border-color:rgba(7,131,255,.18)!important;
+}
+
+.cross-overview-stat:nth-child(2){
+  background:#EEE8FF !important;
+  border-color:rgba(114,87,255,.18)!important;
+}
+
+.cross-overview-stat:nth-child(3){
+  background:#D9F8F4 !important;
+  border-color:rgba(16,207,209,.18)!important;
+}
+
+/* FEATURE CARDS */
+
+.cross-feature-card:nth-child(1),
+.cross-feature-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.cross-feature-card:nth-child(2),
+.cross-feature-card:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.cross-feature-card:nth-child(3),
+.cross-feature-card:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* CAPABILITY CARDS */
+
+.cross-capability-card:nth-child(1),
+.cross-capability-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.cross-capability-card:nth-child(2),
+.cross-capability-card:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.cross-capability-card:nth-child(3),
+.cross-capability-card:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* BENEFIT CARDS */
+
+.cross-benefit-card:nth-child(1),
+.cross-benefit-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+.cross-benefit-card:nth-child(2),
+.cross-benefit-card:nth-child(5){
+  background:#EEE8FF !important;
+}
+
+.cross-benefit-card:nth-child(3),
+.cross-benefit-card:nth-child(6){
+  background:#D9F8F4 !important;
+}
+
+/* PROCESS CARDS */
+
+.cross-process-steps div:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.cross-process-steps div:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.cross-process-steps div:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.cross-process-steps div:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* WHITE ICON STYLE */
+
+.cross-overview-stat span,
+.cross-feature-icon,
+.cross-benefit-card > span,
+.cross-capability-card span,
+.cross-process-steps svg{
+  background:#FFFFFF !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* PREMIUM HOVER */
+
+.cross-overview-stat,
+.cross-feature-card,
+.cross-benefit-card,
+.cross-capability-card,
+.cross-process-steps div{
+  transition:all .35s ease !important;
+}
+
+.cross-overview-stat:hover,
+.cross-feature-card:hover,
+.cross-benefit-card:hover,
+.cross-capability-card:hover,
+.cross-process-steps div:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 28px 65px rgba(31,73,125,.12)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}
+
+/* REMOVE OLD GLOW EFFECT */
+
+.cross-feature-card::after{
+  display:none !important;
+}

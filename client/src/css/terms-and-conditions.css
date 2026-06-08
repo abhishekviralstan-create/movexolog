@@ -878,3 +878,109 @@ body,
     right: 18px;
   }
 }
+/* =====================================
+   HOME PAGE CARD COLORS - TERMS PAGE
+===================================== */
+
+/* TRUST CARDS */
+
+.terms-trust-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.terms-trust-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.terms-trust-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+/* TERMS CARDS */
+
+.terms-card:nth-child(1),
+.terms-card:nth-child(4),
+.terms-card:nth-child(7),
+.terms-card:nth-child(10){
+  background:#EAF5FF !important;
+}
+
+.terms-card:nth-child(2),
+.terms-card:nth-child(5),
+.terms-card:nth-child(8),
+.terms-card:nth-child(11){
+  background:#EEE8FF !important;
+}
+
+.terms-card:nth-child(3),
+.terms-card:nth-child(6),
+.terms-card:nth-child(9){
+  background:#D9F8F4 !important;
+}
+
+/* SUMMARY CARD */
+
+.terms-summary-card{
+  background:#F8FBFF !important;
+}
+
+/* ICONS */
+
+.terms-trust-icon,
+.terms-card-icon,
+.terms-summary-icon{
+  background:#FFFFFF !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* NUMBER COLORS */
+
+.terms-card:nth-child(1) .terms-card-number,
+.terms-card:nth-child(4) .terms-card-number,
+.terms-card:nth-child(7) .terms-card-number,
+.terms-card:nth-child(10) .terms-card-number{
+  color:rgba(7,131,255,.15)!important;
+}
+
+.terms-card:nth-child(2) .terms-card-number,
+.terms-card:nth-child(5) .terms-card-number,
+.terms-card:nth-child(8) .terms-card-number,
+.terms-card:nth-child(11) .terms-card-number{
+  color:rgba(114,87,255,.15)!important;
+}
+
+.terms-card:nth-child(3) .terms-card-number,
+.terms-card:nth-child(6) .terms-card-number,
+.terms-card:nth-child(9) .terms-card-number{
+  color:rgba(16,207,209,.15)!important;
+}
+
+/* REMOVE CIRCLE EFFECTS */
+
+.terms-card::after,
+.terms-hero-panel::before{
+  display:none !important;
+}
+
+/* PREMIUM HOVER */
+
+.terms-trust-card,
+.terms-card,
+.terms-summary-card{
+  transition:all .35s ease !important;
+}
+
+.terms-trust-card:hover,
+.terms-card:hover,
+.terms-summary-card:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 28px 65px rgba(31,73,125,.12)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}
+
+/* CTA CARD SAME HOME STYLE */
+
+.terms-cta-box{
+  border-radius:32px !important;
+}

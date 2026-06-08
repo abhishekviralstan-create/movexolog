@@ -878,3 +878,99 @@ body,
     right: 18px;
   }
 }
+/* =====================================
+   HOME PAGE CARD COLORS - PRIVACY PAGE
+===================================== */
+
+/* TRUST CARDS */
+
+.privacy-trust-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.privacy-trust-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.privacy-trust-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+/* POLICY CARDS */
+
+.privacy-policy-card:nth-child(1),
+.privacy-policy-card:nth-child(4),
+.privacy-policy-card:nth-child(7){
+  background:#EAF5FF !important;
+}
+
+.privacy-policy-card:nth-child(2),
+.privacy-policy-card:nth-child(5),
+.privacy-policy-card:nth-child(8){
+  background:#EEE8FF !important;
+}
+
+.privacy-policy-card:nth-child(3),
+.privacy-policy-card:nth-child(6),
+.privacy-policy-card:nth-child(9){
+  background:#D9F8F4 !important;
+}
+
+/* SUMMARY CARD */
+
+.privacy-summary-card{
+  background:#F8FBFF !important;
+}
+
+/* ICONS */
+
+.privacy-trust-icon,
+.privacy-card-icon,
+.privacy-summary-icon{
+  background:#FFFFFF !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* NUMBER COLORS */
+
+.privacy-policy-card:nth-child(1) .privacy-card-number,
+.privacy-policy-card:nth-child(4) .privacy-card-number,
+.privacy-policy-card:nth-child(7) .privacy-card-number{
+  color:rgba(7,131,255,.15)!important;
+}
+
+.privacy-policy-card:nth-child(2) .privacy-card-number,
+.privacy-policy-card:nth-child(5) .privacy-card-number,
+.privacy-policy-card:nth-child(8) .privacy-card-number{
+  color:rgba(114,87,255,.15)!important;
+}
+
+.privacy-policy-card:nth-child(3) .privacy-card-number,
+.privacy-policy-card:nth-child(6) .privacy-card-number,
+.privacy-policy-card:nth-child(9) .privacy-card-number{
+  color:rgba(16,207,209,.15)!important;
+}
+
+/* REMOVE CIRCLE EFFECT */
+
+.privacy-policy-card::after,
+.privacy-hero-panel::before{
+  display:none !important;
+}
+
+/* PREMIUM HOVER */
+
+.privacy-trust-card,
+.privacy-policy-card,
+.privacy-summary-card{
+  transition:all .35s ease !important;
+}
+
+.privacy-trust-card:hover,
+.privacy-policy-card:hover,
+.privacy-summary-card:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 28px 65px rgba(31,73,125,.12)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}

@@ -783,3 +783,115 @@ body,
     font-size: 1.65rem;
   }
 }
+/* =====================================
+   HOME PAGE CARD COLORS - CONTACT PAGE
+===================================== */
+
+/* HERO QUICK CARDS */
+
+.contact-quick-card:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.contact-quick-card:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.contact-quick-card:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.contact-quick-card:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* CONTACT INFO CARDS */
+
+.contact-card:nth-child(1){
+  background:#EAF5FF !important;
+  border-color:rgba(7,131,255,.18)!important;
+}
+
+.contact-card:nth-child(2){
+  background:#EEE8FF !important;
+  border-color:rgba(114,87,255,.18)!important;
+}
+
+/* PROCESS STEPS */
+
+.contact-process-steps div:nth-child(1){
+  background:#EAF5FF !important;
+}
+
+.contact-process-steps div:nth-child(2){
+  background:#EEE8FF !important;
+}
+
+.contact-process-steps div:nth-child(3){
+  background:#D9F8F4 !important;
+}
+
+.contact-process-steps div:nth-child(4){
+  background:#EAF5FF !important;
+}
+
+/* ICONS */
+
+.contact-quick-card span,
+.contact-card-icon{
+  background:#FFFFFF !important;
+  color:#096FFF !important;
+  box-shadow:0 10px 24px rgba(9,111,255,.08)!important;
+}
+
+/* PROCESS ICONS */
+
+.contact-process-steps svg{
+  color:#096FFF !important;
+}
+
+/* PROCESS BOX */
+
+.contact-process-box{
+  background:#F8FBFF !important;
+  border-color:rgba(4,101,244,.10)!important;
+}
+
+/* FORM */
+
+.contact-form{
+  background:#FFFFFF !important;
+}
+
+.input-wrap{
+  background:#F8FBFF !important;
+}
+
+.input-wrap:focus-within{
+  background:#FFFFFF !important;
+}
+
+/* PREMIUM HOVER */
+
+.contact-quick-card,
+.contact-card,
+.contact-process-steps div{
+  transition:all .35s ease !important;
+}
+
+.contact-quick-card:hover,
+.contact-card:hover,
+.contact-process-steps div:hover{
+  transform:translateY(-10px)!important;
+  box-shadow:0 28px 65px rgba(31,73,125,.12)!important;
+  border-color:rgba(9,111,255,.24)!important;
+}
+
+/* REMOVE ANY GLOW EFFECT */
+
+.contact-card::before,
+.contact-card::after,
+.contact-quick-card::before,
+.contact-quick-card::after{
+  display:none !important;
+}
